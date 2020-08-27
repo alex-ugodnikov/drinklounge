@@ -1,6 +1,8 @@
 // routes/auth.routes.js
 
-const { Router } = require('express');
+const {
+  Router
+} = require('express');
 const router = new Router();
 const bcryptjs = require('bcryptjs');
 const mongoose = require('mongoose');
@@ -8,17 +10,26 @@ const mongoose = require('mongoose');
 const saltRounds = 10;
 const User = require('../models/User.model');
 const routeGuard = require('../configs/route-guard.config');
+const apiUrl = require('../public/javascripts/script');
 
 ////////////////////////////////////////////////////////////////////////
 ///////////////////////////// SIGNUP //////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 
 // .get() route ==> to display the signup form to users
-router.get('/signup', (req, res) => res.render('auth/signup-form.hbs'));
+router.get('/signup', (req, res) => {
+  res.render('auth/signup-form.hbs');
+  //test: 
+  console.log(apiUrl);
+});
 
 // .post() route ==> to process form data
 router.post('/signup', (req, res, next) => {
-  const { username, email, password } = req.body;
+  const {
+    username,
+    email,
+    password
+  } = req.body;
 
   if (!username || !email || !password) {
     res.render('auth/signup-form.hbs', {
@@ -59,7 +70,9 @@ router.post('/signup', (req, res, next) => {
     })
     .catch(error => {
       if (error instanceof mongoose.Error.ValidationError) {
-        res.status(500).render('auth/signup-form.hbs', { errorMessage: error.message });
+        res.status(500).render('auth/signup-form.hbs', {
+          errorMessage: error.message
+        });
       } else if (error.code === 11000) {
         res.status(500).render('auth/signup-form.hbs', {
           errorMessage: 'Username and email need to be unique. Either username or email is already used.'
@@ -79,7 +92,10 @@ router.get('/login', (req, res) => res.render('auth/login-form.hbs'));
 
 // .post() login route ==> to process form data
 router.post('/login', (req, res, next) => {
-  const { email, password } = req.body;
+  const {
+    email,
+    password
+  } = req.body;
 
   if (email === '' || password === '') {
     res.render('auth/login-form.hbs', {
@@ -88,7 +104,9 @@ router.post('/login', (req, res, next) => {
     return;
   }
 
-  User.findOne({ email })
+  User.findOne({
+      email
+    })
     .then(user => {
       if (!user) {
         res.render('auth/login-form.hbs', {
