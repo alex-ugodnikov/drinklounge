@@ -76,8 +76,8 @@ ul li {
 #to-right {
   display: flex;
   align-items: center;
-  padding: 1em;
   float: right;
+
 }
 
 #logout-form {
@@ -117,4 +117,7 @@ ul li {
   color: #000;
   font-weight: bold;
   font-size: 2em;
+}
+#to-center {
+  margin-right: 575px;
 }
