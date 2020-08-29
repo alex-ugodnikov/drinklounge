@@ -10,6 +10,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "axios": "^0.20.0",
     "bcryptjs": "^2.4.3",
     "cloudinary": "^1.22.0",
     "connect-mongo": "^3.2.0",
