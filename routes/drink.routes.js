@@ -44,6 +44,7 @@ router.post('/post-create', fileUploader.single('post-image'), (req, res, next) 
 router.get('/alldrinks', (req, res, next) => {
 
   axios.get('https://www.thecocktaildb.com/api/json/v1/1/search.php?f=a')
+  
   .then((responseFromAPI) => {
     // handle success
     console.log(responseFromAPI);
@@ -54,6 +55,14 @@ router.get('/alldrinks', (req, res, next) => {
     console.log(error);
   });
 
+  // Post.find()
+  //   .populate('author')
+  //   .then(postsFromDB => {
+  //     // console.log(postsFromDB);
+
+  //     res.render('drinks/list.hbs', { posts: postsFromDB });
+  //   })
+  //   .catch(err => console.log(`Err while getting all the posts: ${err}`));
 });
 
 // GET route - show the details of a single post

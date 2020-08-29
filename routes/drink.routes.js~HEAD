@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const axios = require('axios'); 
 
 const Post = require('../models/Post.model');
 
@@ -38,17 +39,21 @@ router.post('/post-create', fileUploader.single('post-image'), (req, res, next) 
     .catch(err => console.log(`Err while creating a new post: ${err}`));
 });
 
-// GET route - to display all the posts (implementation of POPULATE)
+/* GET all drinks page */
 
-router.get('/posts', (req, res, next) => {
-  Post.find()
-    .populate('author')
-    .then(postsFromDB => {
-      // console.log(postsFromDB);
+router.get('/alldrinks', (req, res, next) => {
 
-      res.render('posts/list.hbs', { posts: postsFromDB });
-    })
-    .catch(err => console.log(`Err while getting all the posts: ${err}`));
+  axios.get('https://www.thecocktaildb.com/api/json/v1/1/search.php?f=a')
+  .then((responseFromAPI) => {
+    // handle success
+    console.log(responseFromAPI);
+    res.render('drinks/list.hbs', { cocktails: responseFromAPI.data.drinks });
+  })
+  .catch((error) => {
+    // handle error
+    console.log(error);
+  });
+
 });
 
 // GET route - show the details of a single post
