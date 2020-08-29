@@ -1,6 +1,7 @@
 body {
   padding: 50px;
   font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif;
+  background: linear-gradient(#072c41,#000000) fixed;
 }
 
 a {
@@ -150,4 +151,8 @@ ul li {
   flex-direction: row;  
   width: 250px;
   padding: 0 0 15px 0;
+}
+
+#background{
+  background-color: rgba(255, 255, 255, 0.1);
 }
