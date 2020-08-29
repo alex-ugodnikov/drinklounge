@@ -191,9 +191,7 @@ router.post('/login', (req, res, next) => {
 ////////////////////////////////////////////////////////////////////////
 
 router.post('/logout', (req, res) => {
-  // add code here
-  res.session.destroy();
-
+  req.session.destroy();
   res.redirect('/');
 });
 
