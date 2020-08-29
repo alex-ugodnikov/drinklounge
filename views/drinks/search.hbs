@@ -1,3 +1,5 @@
+<div class="search-container">
+
 <h2>Search Cocktails</h2>
 
 <form action="../search">
@@ -9,9 +11,8 @@
 			</div>
 </form>
 
-
 <div class="browse-cocktails">
-  <p>Browse cocktails:</p>
+  <h3>Browse by Letter:</h3>
 			<a href="/search?letter=0">0</a> 
       <a href="/search?letter=1">1</a> 
       <a href="/search?letter=2">2</a> 
@@ -51,11 +52,11 @@
 </div>
 
 {{#if letter}}
-<h3>Cocktails that start with "{{this.letter}}"</h3>
+<p>Cocktails that start with "{{this.letter}}":</p>
 {{/if}}
 
 {{#if s}}
-<h3>Search results for "{{this.s}}"</h3>
+<p>Search results for "{{this.s}}":</p>
 {{/if}}
 
 {{#if cocktails}}
@@ -71,3 +72,5 @@
 {{else}}
   <p>No results found or you haven't done a search yet!</p>
 {{/if}}
+
+</div>

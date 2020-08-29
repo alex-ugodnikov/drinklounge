@@ -220,3 +220,10 @@ ul li {
   border-radius: 20px;
   text-decoration: none;
   }
+.search-container {
+  color: white;
+}
+
+.browse-cocktails {
+  padding-bottom: 20px;
+}
