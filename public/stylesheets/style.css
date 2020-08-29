@@ -121,3 +121,21 @@ ul li {
 #to-center {
   margin-right: 575px;
 }
+
+#land-head{
+  text-align: center;
+  border-top: 1px solid black;
+}
+
+#land-div{
+  text-align: center;
+  justify-content: center;
+  border-bottom: 1px solid black;
+}
+
+#land-content{
+  display: flex;
+  flex-direction: column;
+  height: 50vw;
+  justify-content: center;
+}
