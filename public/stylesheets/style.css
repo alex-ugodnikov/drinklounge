@@ -122,6 +122,7 @@ ul li {
   margin-right: 575px;
 }
 
+
 #land-head{
   text-align: center;
   border-top: 1px solid black;
@@ -138,4 +139,15 @@ ul li {
   flex-direction: column;
   height: 50vw;
   justify-content: center;
+
+#all-cocktails {
+  display: flex;
+  flex-wrap: wrap;
+
+}
+
+#all-cocktails .single-cocktail {
+  flex-direction: row;  
+  width: 250px;
+  padding: 0 0 15px 0;
 }
