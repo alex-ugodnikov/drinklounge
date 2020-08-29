@@ -1,0 +1,22 @@
+<div id="form">
+  <h2>Edit Profile</h2>
+  <form action="/edit-profile" method="POST">
+    <label>Username
+      <input type="text" name="username" placeholder="{{user.username}}" />
+    </label>
+
+    <label>Email
+      <input type="email" name="email" placeholder="{{user.email}}" />
+    </label>
+
+    <label>Password
+      <input type="password" name="password" placeholder="********" />
+    </label>
+
+    <button type="submit">Save Changes</button>
+
+    {{#if errorMessage}}
+    <p class="error">{{errorMessage}}</p>
+    {{/if}}
+  </form>
+</div>

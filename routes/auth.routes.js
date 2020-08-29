@@ -7,6 +7,7 @@ const router = new Router();
 const bcryptjs = require('bcryptjs');
 const mongoose = require('mongoose');
 
+const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
 const saltRounds = 10;
 const User = require('../models/User.model');
 const routeGuard = require('../configs/route-guard.config');
@@ -39,7 +40,6 @@ router.post('/signup', (req, res, next) => {
   }
 
   // make sure passwords are strong:
-  const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
   if (!regex.test(password)) {
     res.status(500).render('auth/signup-form.hbs', {
       errorMessage: 'Password needs to have at least 6 chars and must contain at least one number, one lowercase and one uppercase letter.'
@@ -63,9 +63,6 @@ router.post('/signup', (req, res, next) => {
     })
     .then(userFromDB => {
       console.log('Newly created user is: ', userFromDB);
-      // add code here
-      // after signup, i want my users to login
-
       res.redirect('/login');
     })
     .catch(error => {
@@ -82,6 +79,69 @@ router.post('/signup', (req, res, next) => {
       }
     }); // close .catch()
 }); // close router.post()
+
+////////////////////////////////////////////////////////////////////////
+///////////////////////// UPDATE PROFILE ///////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+//.get() route ==> to display the update profile form
+router.get('/edit-profile', (req, res) => res.render('users/edit-profile.hbs'))
+
+//.post() profile route ==> to process updated profile data
+router.post('/edit-profile/:userId', (req, res, next) => {
+  const {
+    proposedUser,
+    proposedEmail,
+    proposedPassword
+  } = req.body;
+
+  if (!proposedUser && !proposedEmail && !proposedPassword) {
+    res.render('users/edit-profile.hbs', {
+      errorMessage: 'Please update at least one field to save changes to your profile.'
+    });
+    return;
+  }
+
+  // make sure passwords are strong:
+  if (!regex.test(proposedPassword)) {
+    res.status(500).render('users/edit-profile.hbs', {
+      errorMessage: 'New password needs to have at least 6 chars and must contain at least one number, one lowercase and one uppercase letter.'
+    });
+    return;
+  }
+
+  //IN PROGRESS - need to figure out how to implement hashing passwords on update - A. Garcia
+
+  // bcryptjs
+  //   .genSalt(saltRounds)
+  //   .then(salt => bcryptjs.hash(proposedPassword, salt))
+  //   .then(updatedHash => {
+  //     console.log(proposedUser, proposedEmail, updatedHash)
+  //     return User.update({
+  //       username: proposedUser,
+  //       email: proposedEmail,
+  //       passwordHash: updatedHash
+  //     });
+  //   })
+  //   .then(updatedUser => {
+  //     console.log('user credentials updated:', updatedUser);
+  //     res.redirect('/profile');
+  //   })
+  //   .catch(error => {
+  //     if (error instanceof mongoose.Error.ValidationError) {
+  //       res.status(500).render('users/edit-profile.hbs', {
+  //         errorMessage: error.message
+  //       });
+  //     } else if (error.code === 11000) {
+  //       res.status(500).render('users/edit-profile.hbs', {
+  //         errorMessage: 'Username and email need to be unique. Either username or email is already used.'
+  //       });
+  //     } else {
+  //       next(error);
+  //     }
+  //   });
+})
+
 
 ////////////////////////////////////////////////////////////////////////
 ///////////////////////////// LOGIN ////////////////////////////////////
