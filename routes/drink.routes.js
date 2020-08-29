@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const axios = require('axios'); 
+const axios = require('axios');
 
 const Post = require('../models/Post.model');
 
@@ -14,7 +14,10 @@ router.get('/post-create', (req, res) => res.render('posts/create.hbs'));
 // POST route - save the new post in the DB
 
 router.post('/post-create', fileUploader.single('post-image'), (req, res, next) => {
-  const { title, content } = req.body;
+  const {
+    title,
+    content
+  } = req.body;
 
   // console.log('file: ', req.file);
   // 'author' field represents the currently logged in user -  but we need only their ID
@@ -44,16 +47,18 @@ router.post('/post-create', fileUploader.single('post-image'), (req, res, next) 
 router.get('/alldrinks', (req, res, next) => {
 
   axios.get('https://www.thecocktaildb.com/api/json/v1/1/search.php?f=a')
-  
-  .then((responseFromAPI) => {
-    // handle success
-    console.log(responseFromAPI);
-    res.render('drinks/list.hbs', { cocktails: responseFromAPI.data.drinks });
-  })
-  .catch((error) => {
-    // handle error
-    console.log(error);
-  });
+
+    .then((responseFromAPI) => {
+      // handle success
+      console.log(responseFromAPI);
+      res.render('drinks/list.hbs', {
+        cocktails: responseFromAPI.data.drinks
+      });
+    })
+    .catch((error) => {
+      // handle error
+      console.log(error);
+    });
 
   // Post.find()
   //   .populate('author')
@@ -82,7 +87,9 @@ router.get('/posts/:postId', (req, res, next) => {
     })
     .then(foundPost => {
       // console.log(foundPost);
-      res.render('posts/details.hbs', { post: foundPost });
+      res.render('posts/details.hbs', {
+        post: foundPost
+      });
     })
     .catch(err => console.log(`Err while getting a single post: ${err}`));
 });
