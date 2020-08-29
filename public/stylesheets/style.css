@@ -170,3 +170,11 @@ ul li {
   text-align: center;
   color: white;
 }
+
+.search-container {
+  color: white;
+}
+
+.browse-cocktails {
+  padding-bottom: 20px;
+}
