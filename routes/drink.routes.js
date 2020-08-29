@@ -93,7 +93,11 @@ router.get('/search', (req, res, next) => {
         console.log(error);
       });
 
+<<<<<<< HEAD
   } else if (s !== '') { // if input was submitted
+=======
+  } else if (s !== undefined) {  // if input was submitted
+>>>>>>> 4e29dc7b90f4cc478225d2d558b3eaa1faae71d4
     axios.get(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${s}`)
       .then((responseFromAPI) => {
         // handle success
