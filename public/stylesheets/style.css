@@ -121,3 +121,14 @@ ul li {
 #to-center {
   margin-right: 575px;
 }
+
+#all-cocktails {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#all-cocktails .single-cocktail {
+  flex-direction: row;  
+  width: 250px;
+  padding: 0 0 15px 0;
+}
