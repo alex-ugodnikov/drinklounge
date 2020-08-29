@@ -5,7 +5,7 @@
     {{#each cocktails}}
       <div class="single-cocktail">
         <a href="/drinks/{{this.idDrink}}"><img src="{{this.strDrinkThumb}}" alt="" width="150"></a>
-        <p id="drink-info">{{this.strDrink}} / {{ this.strAlcoholic }}</p>
+        <p class="drink-info">{{this.strDrink}} / {{ this.strAlcoholic }}</p>
         <p><a href="/drinks/{{this.idDrink}}"> Show details </a></p>
       </div>
     {{/each}}
