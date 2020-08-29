@@ -1,0 +1,73 @@
+<h2>Search Cocktails</h2>
+
+<form action="../search">
+	<div>
+		<input type="text" name="s" placeholder="Search by Cocktail Name or Ingredient">
+			<div>
+				<button type="submit">Search</button>
+			</div>
+			</div>
+</form>
+
+
+<div class="browse-cocktails">
+  <p>Browse cocktails:</p>
+			<a href="/search?letter=0">0</a> 
+      <a href="/search?letter=1">1</a> 
+      <a href="/search?letter=2">2</a> 
+      <a href="/search?letter=3">3</a> 
+      <a href="/search?letter=4">4</a> 
+      <a href="/search?letter=5">5</a> 
+      <a href="/search?letter=6">6</a> 
+      <a href="/search?letter=7">7</a> 
+      <a href="/search?letter=8">8</a> 
+      <a href="/search?letter=9">9</a> 
+      <a href="/search?letter=A">A</a> 
+      <a href="/search?letter=B">B</a> 
+      <a href="/search?letter=C">C</a> 
+      <a href="/search?letter=D">D</a> 
+      <a href="/search?letter=E">E</a> 
+      <a href="/search?letter=F">F</a> 
+      <a href="/search?letter=G">G</a> 
+      <a href="/search?letter=H">H</a> 
+      <a href="/search?letter=I">I</a> 
+      <a href="/search?letter=J">J</a> 
+      <a href="/search?letter=K">K</a> 
+      <a href="/search?letter=L">L</a> 
+      <a href="/search?letter=M">M</a> 
+      <a href="/search?letter=N">N</a> 
+      <a href="/search?letter=O">O</a> 
+      <a href="/search?letter=P">P</a> 
+      <a href="/search?letter=Q">Q</a> 
+      <a href="/search?letter=R">R</a> 
+      <a href="/search?letter=S">S</a> 
+      <a href="/search?letter=T">T</a> 
+      <a href="/search?letter=U">U</a> 
+      <a href="/search?letter=V">V</a> 
+      <a href="/search?letter=W">W</a> 
+      <a href="/search?letter=X">X</a> 
+      <a href="/search?letter=Y">Y</a> 
+      <a href="/search?letter=Z">Z</a> 
+</div>
+
+{{#if letter}}
+<h3>Cocktails that start with "{{this.letter}}"</h3>
+{{/if}}
+
+{{#if s}}
+<h3>Search results for "{{this.s}}"</h3>
+{{/if}}
+
+{{#if cocktails}}
+  <div id = "all-cocktails">
+    {{#each cocktails}}
+      <div class="single-cocktail">
+        <a href="/drinks/{{this.idDrink}}"><img src="{{this.strDrinkThumb}}" alt="" width="100"></a>
+        <p>{{this.strDrink}} / {{ this.strAlcoholic }}</p>
+        <p><a href="/drinks/{{this.idDrink}}"> Show details </a></p>
+      </div>
+    {{/each}}
+  </div>
+{{else}}
+  <p>No posts!</p>
+{{/if}}
