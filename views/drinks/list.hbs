@@ -1,15 +1,15 @@
 <h2>All Cocktails</h2>
 
 {{#if cocktails}}
-  <div id = "all-cocktails">
-    {{#each cocktails}}
-      <div class="single-cocktail">
-        <a href="/drinks/{{this.idDrink}}"><img src="{{this.strDrinkThumb}}" alt="" width="100"></a>
-        <p>{{this.strDrink}} / {{ this.strAlcoholic }}</p>
-        <p><a href="/drinks/{{this.idDrink}}"> Show details </a></p>
-      </div>
-    {{/each}}
+<div id="all-cocktails">
+  {{#each cocktails}}
+  <div class="single-cocktail">
+    <a href="/drinks/{{this.idDrink}}"><img src="{{this.strDrinkThumb}}" alt="" width="100"></a>
+    <p>{{this.strDrink}} / {{ this.strAlcoholic }}</p>
+    <p><a href="/drinks/{{this.idDrink}}"> Show details </a></p>
   </div>
+  {{/each}}
+</div>
 {{else}}
-  <p>No posts!</p>
+<p>No posts!</p>
 {{/if}}
