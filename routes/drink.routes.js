@@ -11,40 +11,6 @@ const {
   response
 } = require('express');
 
-// // GET route - render a form for users to be able to add title and content of a new post
-// router.get('/post-create', (req, res) => res.render('posts/create.hbs'));
-
-// // POST route - save the new post in the DB
-
-// router.post('/post-create', fileUploader.single('post-image'), (req, res, next) => {
-//   const {
-//     title,
-//     content
-//   } = req.body;
-
-//   // console.log('file: ', req.file);
-//   // 'author' field represents the currently logged in user -  but we need only their ID
-
-//   const newPost = {
-//     title,
-//     content,
-//     author: req.session.loggedInUser._id
-//   };
-
-//   // if user updates the image
-
-//   if (req.file) {
-//     newPost.imageUrl = req.file.path;
-//   }
-
-//   Post.create(newPost)
-//     .then(postDocFromDB => {
-//       // console.log(postDocFromDB);
-//       res.redirect('/posts');
-//     })
-//     .catch(err => console.log(`Err while creating a new post: ${err}`));
-// });
-
 /* GET all drinks page */
 
 router.get('/alldrinks', (req, res, next) => {
@@ -93,11 +59,7 @@ router.get('/search', (req, res, next) => {
         console.log(error);
       });
 
-<<<<<<< HEAD
-  } else if (s !== '') { // if input was submitted
-=======
   } else if (s !== undefined) {  // if input was submitted
->>>>>>> 4e29dc7b90f4cc478225d2d558b3eaa1faae71d4
     axios.get(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${s}`)
       .then((responseFromAPI) => {
         // handle success

@@ -1,23 +1,12 @@
 <h2 id="all-head">All Cocktails</h2>
 
 {{#if cocktails}}
-<<<<<<< HEAD
 <div id="all-cocktails">
   {{#each cocktails}}
   <div class="single-cocktail">
     <a href="/drinks/{{this.idDrink}}"><img src="{{this.strDrinkThumb}}" alt="" width="150"></a>
-    <p id="drink-info">{{this.strDrink}} / {{ this.strAlcoholic }}</p>
+    <p class="drink-info">{{this.strDrink}} / {{ this.strAlcoholic }}</p>
     <p><a href="/drinks/{{this.idDrink}}"> Show details </a></p>
-=======
-  <div id = "all-cocktails">
-    {{#each cocktails}}
-      <div class="single-cocktail">
-        <a href="/drinks/{{this.idDrink}}"><img src="{{this.strDrinkThumb}}" alt="" width="150"></a>
-        <p class="drink-info">{{this.strDrink}} / {{ this.strAlcoholic }}</p>
-        <p><button class="details-button"><a href="/drinks/{{this.idDrink}}"> Show details </a></button></p>
-      </div>
-    {{/each}}
->>>>>>> 4e29dc7b90f4cc478225d2d558b3eaa1faae71d4
   </div>
   {{/each}}
 </div>
