@@ -1,6 +1,22 @@
-<h2>{{drinks.strDrink}}</h2>
+<h2>{{this.strDrink}}</h2>
 
 <div class="single-cocktail">
-  <a href="/drinks/{{drinks.idDrink}}"><img src="{{drinks.strDrinkThumb}}" alt="" width="100"></a>
-  <p>{{drinks.strDrink}} / {{ drinks.strAlcoholic }}</p>
+  <a href="/drinks/{{this.idDrink}}"><img src="{{this.strDrinkThumb}}" alt="" width="100"></a>
+  <p>{{this.strDrink}} / {{ this.strAlcoholic }}</p>
 </div>
+
+{{#unless post.comments}}
+<p>No comments yet!</p>
+{{/unless}}
+
+{{#each post.comments}}
+<p> <b> {{ this.author.username }} </b>: {{ this.content }} </p>
+{{/each}}
+
+<hr>
+<h3> Add a comment </h3>
+
+<form action="/posts/{{post._id}}/comment" method="POST">
+  <textarea name="content" cols="50" rows="10"></textarea>
+  <button type="submit"> Comment </button>
+</form>

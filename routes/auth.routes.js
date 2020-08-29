@@ -12,6 +12,9 @@ const saltRounds = 10;
 const User = require('../models/User.model');
 const routeGuard = require('../configs/route-guard.config');
 const apiUrl = require('../public/javascripts/script');
+const {
+  restart
+} = require('nodemon');
 
 ////////////////////////////////////////////////////////////////////////
 ///////////////////////////// SIGNUP //////////////////////////////////
@@ -88,59 +91,106 @@ router.post('/signup', (req, res, next) => {
 router.get('/edit-profile', (req, res) => res.render('users/edit-profile.hbs'))
 
 //.post() profile route ==> to process updated profile data
-router.post('/edit-profile/:userId', (req, res, next) => {
+router.post('/edit-profile', (req, res, next) => {
   const {
     proposedUser,
     proposedEmail,
     proposedPassword
   } = req.body;
 
+  //check to make sure at least one field is filled out
   if (!proposedUser && !proposedEmail && !proposedPassword) {
     res.render('users/edit-profile.hbs', {
       errorMessage: 'Please update at least one field to save changes to your profile.'
-    });
-    return;
+    })
   }
 
-  // make sure passwords are strong:
-  if (!regex.test(proposedPassword)) {
-    res.status(500).render('users/edit-profile.hbs', {
-      errorMessage: 'New password needs to have at least 6 chars and must contain at least one number, one lowercase and one uppercase letter.'
-    });
-    return;
+  //if username was updated: 
+  if (proposedUser) {
+    User.findByIdAndUpdate({
+        _id: req.params.user_id,
+        username: proposedUser
+      }, {
+        new: true
+      }
+      .then(updatedUser => {
+        console.log(`username updated: ${updatedUser}`)
+        res.redirect('users/user-profile.hbs')
+      })
+      .catch(err => {
+        //check that username is unique:
+        if (err.code === 11000) {
+          res.status(500).render('users/edit-profile.hbs', {
+            errorMessage: 'Username and email need to be unique. Either username or email is already used.'
+          });
+        } else console.log(`error updating username: ${err}`)
+      })
+    )
   }
+
+  //if email was updated:
+  if (proposedEmail) {
+    User.findByIdAndUpdate({
+        _id: req.params.user_id,
+        email: proposedEmail
+      }, {
+        new: true
+      }
+      .then(updatedEmail => {
+        console.log(`user email updated: ${updatedEmail}`)
+        res.redirect('users/user-profile.hbs')
+
+      })
+      .catch(err => {
+        //check that email is unique:
+        if (err.code === 11000) {
+          res.status(500).render('users/edit-profile.hbs', {
+            errorMessage: 'Username and email need to be unique. Either username or email is already used.'
+          });
+        } else console.log(`error updating email: ${err}`)
+      })
+    )
+  }
+
 
   //IN PROGRESS - need to figure out how to implement hashing passwords on update - A. Garcia
 
-  // bcryptjs
-  //   .genSalt(saltRounds)
-  //   .then(salt => bcryptjs.hash(proposedPassword, salt))
-  //   .then(updatedHash => {
-  //     console.log(proposedUser, proposedEmail, updatedHash)
-  //     return User.update({
-  //       username: proposedUser,
-  //       email: proposedEmail,
-  //       passwordHash: updatedHash
-  //     });
-  //   })
-  //   .then(updatedUser => {
-  //     console.log('user credentials updated:', updatedUser);
-  //     res.redirect('/profile');
-  //   })
-  //   .catch(error => {
-  //     if (error instanceof mongoose.Error.ValidationError) {
-  //       res.status(500).render('users/edit-profile.hbs', {
-  //         errorMessage: error.message
-  //       });
-  //     } else if (error.code === 11000) {
-  //       res.status(500).render('users/edit-profile.hbs', {
-  //         errorMessage: 'Username and email need to be unique. Either username or email is already used.'
-  //       });
-  //     } else {
-  //       next(error);
-  //     }
-  //   });
-})
+  //if password was updated: 
+  if (proposedPassword) {
+    // make sure passwords are strong:
+    if (!regex.test(proposedPassword)) {
+      res.status(500).render('users/edit-profile.hbs', {
+        errorMessage: 'New password needs to have at least 6 chars and must contain at least one number, one lowercase and one uppercase letter.'
+      });
+      return;
+    }
+    //hash the new password:
+    bcryptjs
+      .genSalt(saltRounds)
+      .then(salt => bcryptjs.hash(proposedPassword, salt))
+      .then(hashedPassword => {
+        User.findByIdAndUpdate({
+          _id: req.params.user_id,
+          password: hashedPassword
+        }, {
+          new: true
+        })
+      })
+      .then(updatedUser => {
+        console.log('user password has been updated.')
+        res.redirect('/');
+      })
+      .catch(error => {
+        if (error instanceof mongoose.Error.ValidationError) {
+          res.status(500).render('users/edit-profile.hbs', {
+            errorMessage: error.message
+          });
+        } else {
+          next(error);
+        }
+      });
+  }
+});
 
 
 ////////////////////////////////////////////////////////////////////////

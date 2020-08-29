@@ -48,17 +48,17 @@ const {
 /* GET all drinks page */
 
 router.get('/alldrinks', (req, res, next) => {
+  axios
+    .get('https://www.thecocktaildb.com/api/json/v1/1/search.php?f=a')
 
-  axios.get('https://www.thecocktaildb.com/api/json/v1/1/search.php?f=a')
-
-    .then((responseFromAPI) => {
+    .then(responseFromAPI => {
       // handle success
       console.log(responseFromAPI);
       res.render('drinks/list.hbs', {
         cocktails: responseFromAPI.data.drinks
       });
     })
-    .catch((error) => {
+    .catch(error => {
       // handle error
       console.log(error);
     });
@@ -70,50 +70,62 @@ router.get('/alldrinks', (req, res, next) => {
 router.get('/search', (req, res, next) => {
 
   // Pull variables from search query
-  const { letter, s } = req.query;
+  const {
+    letter,
+    s
+  } = req.query;
 
   // Checking if any search variables exist = run apropriate query
 
   if (letter !== undefined) { // if any letter was clicked
 
     axios.get(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${letter}`)
-    .then((responseFromAPI) => {
-      // handle success
-      console.log(responseFromAPI);
-      res.render('drinks/search.hbs', { letter:letter, cocktails: responseFromAPI.data.drinks });
-    })
-    .catch((error) => {
-      // handle error
-      console.log(error);
-    });  
+      .then((responseFromAPI) => {
+        // handle success
+        console.log(responseFromAPI);
+        res.render('drinks/search.hbs', {
+          letter: letter,
+          cocktails: responseFromAPI.data.drinks
+        });
+      })
+      .catch((error) => {
+        // handle error
+        console.log(error);
+      });
 
+<<<<<<< HEAD
+  } else if (s !== '') { // if input was submitted
+=======
   } else if (s !== undefined) {  // if input was submitted
+>>>>>>> 4e29dc7b90f4cc478225d2d558b3eaa1faae71d4
     axios.get(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${s}`)
-    .then((responseFromAPI) => {
-      // handle success
-      console.log(responseFromAPI);
-      res.render('drinks/search.hbs', { s:s, cocktails: responseFromAPI.data.drinks });
-    })
-    .catch((error) => {
-      // handle error
-      console.log(error);
-    });      
+      .then((responseFromAPI) => {
+        // handle success
+        console.log(responseFromAPI);
+        res.render('drinks/search.hbs', {
+          s: s,
+          cocktails: responseFromAPI.data.drinks
+        });
+      })
+      .catch((error) => {
+        // handle error
+        console.log(error);
+      });
 
   } else { // if no option was selected, showing basic search page
-    res.render('drinks/search.hbs');  
+    res.render('drinks/search.hbs');
   }
 });
 
-//GET route - show details for a Random Drink 
+//GET route - show details for a Random Drink
 
 router.get('/random', (req, res, next) => {
-  axios
-    .get(`https://www.thecocktaildb.com/api/json/v1/1/random.php`)
-    .then((responseFromApi) => {
-      // console.log(responseFromApi);
-      res.render('drinks/details.hbs', responseFromApi.data.drinks);
-    })
+  axios.get(`https://www.thecocktaildb.com/api/json/v1/1/random.php`).then(responseFromApi => {
+    console.log(responseFromApi.data);
+    res.render('drinks/details.hbs', responseFromApi.data.drinks);
+  })
 });
+
 
 // GET route - show the details of a single post
 
