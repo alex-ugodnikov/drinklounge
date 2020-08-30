@@ -107,15 +107,15 @@ router.post('/edit-profile', (req, res, next) => {
 
   //if username was updated: 
   if (proposedUser) {
-    User.findByIdAndUpdate({
-        _id: req.params.user_id,
+    console.log(proposedUser)
+    User.findByIdAndUpdate(req.session.loggedInUser._id, {
         username: proposedUser
       }, {
         new: true
-      }
+      })
       .then(updatedUser => {
         console.log(`username updated: ${updatedUser}`)
-        res.redirect('users/user-profile.hbs')
+        res.redirect('/profile')
       })
       .catch(err => {
         //check that username is unique:
@@ -125,20 +125,19 @@ router.post('/edit-profile', (req, res, next) => {
           });
         } else console.log(`error updating username: ${err}`)
       })
-    )
   }
 
   //if email was updated:
   if (proposedEmail) {
-    User.findByIdAndUpdate({
-        _id: req.params.user_id,
+    console.log(proposedEmail)
+    User.findByIdAndUpdate(req.session.loggedInUser._id, {
         email: proposedEmail
       }, {
         new: true
-      }
+      })
       .then(updatedEmail => {
         console.log(`user email updated: ${updatedEmail}`)
-        res.redirect('users/user-profile.hbs')
+        res.redirect('/profile')
 
       })
       .catch(err => {
@@ -149,7 +148,6 @@ router.post('/edit-profile', (req, res, next) => {
           });
         } else console.log(`error updating email: ${err}`)
       })
-    )
   }
 
 
@@ -157,6 +155,7 @@ router.post('/edit-profile', (req, res, next) => {
 
   //if password was updated: 
   if (proposedPassword) {
+    console.log(proposedPassword)
     // make sure passwords are strong:
     if (!regex.test(proposedPassword)) {
       res.status(500).render('users/edit-profile.hbs', {
@@ -168,9 +167,9 @@ router.post('/edit-profile', (req, res, next) => {
     bcryptjs
       .genSalt(saltRounds)
       .then(salt => bcryptjs.hash(proposedPassword, salt))
+      //update the user with the new password
       .then(hashedPassword => {
-        User.findByIdAndUpdate({
-          _id: req.params.user_id,
+        User.findByIdAndUpdate(req.session.loggedInUser._id, {
           password: hashedPassword
         }, {
           new: true
@@ -178,7 +177,7 @@ router.post('/edit-profile', (req, res, next) => {
       })
       .then(updatedUser => {
         console.log('user password has been updated.')
-        res.redirect('/');
+        res.redirect('/profile');
       })
       .catch(error => {
         if (error instanceof mongoose.Error.ValidationError) {
