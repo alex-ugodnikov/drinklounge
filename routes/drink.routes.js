@@ -83,7 +83,7 @@ router.get('/search', (req, res, next) => {
 
 router.get('/random', (req, res, next) => {
   axios.get(`https://www.thecocktaildb.com/api/json/v1/1/random.php`).then(responseFromApi => {
-      console.log(responseFromApi.data.drinks.body);
+      console.log(responseFromApi.data);
       res.render('drinks/details.hbs', responseFromApi.data.drinks);
     })
     .catch(err => console.log(`error getting drink details: ${err}`))
