@@ -59,7 +59,7 @@ router.get('/search', (req, res, next) => {
         console.log(error);
       });
 
-  } else if (s !== undefined) {  // if input was submitted
+  } else if (s !== undefined) { // if input was submitted
     axios.get(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${s}`)
       .then((responseFromAPI) => {
         // handle success
@@ -83,10 +83,26 @@ router.get('/search', (req, res, next) => {
 
 router.get('/random', (req, res, next) => {
   axios.get(`https://www.thecocktaildb.com/api/json/v1/1/random.php`).then(responseFromApi => {
-    console.log(responseFromApi.data);
-    res.render('drinks/details.hbs', responseFromApi.data.drinks);
-  })
+      console.log(responseFromApi.data);
+      res.render('drinks/details.hbs', responseFromApi.data.drinks);
+    })
+    .catch(err => console.log(`error getting drink details: ${err}`))
 });
+
+//GET route - show details for a single drink
+
+router.get('/drinks/:id', (req, res, next) => {
+  const drinkId = req.query;
+
+  axios.get(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drinkId}`)
+    .then(responseFromApi => {
+      console.log(responseFromApi.data);
+      res.render('drinks/details.hbs', {
+        idDrink: drinkId,
+        cocktails: responseFromApi.data.drinks
+      });
+    })
+})
 
 
 // GET route - show the details of a single post
