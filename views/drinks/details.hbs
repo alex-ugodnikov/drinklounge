@@ -1,3 +1,5 @@
+{{#if cocktails}}
+
 <h2>{{this.strDrink}}</h2>
 
 <div class="single-cocktail">
@@ -12,6 +14,8 @@
 {{#each post.comments}}
 <p> <b> {{ this.author.username }} </b>: {{ this.content }} </p>
 {{/each}}
+
+{{/if}}
 
 <hr>
 <h3> Add a comment </h3>
