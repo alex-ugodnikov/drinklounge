@@ -11,6 +11,8 @@
 			</div>
 </form>
 
+<hr />
+
 <div class="browse-cocktails">
   <h3>Browse by Letter:</h3>
 			<a href="/search?letter=0">0</a> 
@@ -50,6 +52,21 @@
       <a href="/search?letter=Y">Y</a> 
       <a href="/search?letter=Z">Z</a> 
 </div>
+
+<hr />
+
+<h3>Browse by Popular Ingredient:</h3>
+<div class="browse-cocktails">
+
+			<a href="/search?s=vodka">Vodka</a> 
+      <a href="/search?s=gin">Gin</a> 
+      <a href="/search?s=rum">Rum</a> 
+      <a href="/search?s=tequila">Tequila</a> 
+      <a href="/search?s=scotch">Scotch</a> 
+
+</div>
+
+<hr />
 
 {{#if letter}}
 <p>Cocktails that start with "{{this.letter}}":</p>
