@@ -99,9 +99,16 @@ router.get('/drinks/:id', (req, res, next) => {
   axios.get(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drinkId}`)
     .then(responseFromApi => {
       console.log(responseFromApi.data);
+      //pseudo code to manage array of ingredients with measurements for any drink:
+
+      //iterate over every ingredient & measurement
+      //if ingredient has an associated measurement
+      //concatenate the strings ("tequila - 1.5")
+      //else push ingredient as is
       res.render('drinks/details.hbs', {
         cocktails: responseFromApi.data.drinks,
         idDrink: drinkId
+        //ingredients key (an array of k/v pairs) 
       });
     })
 })
