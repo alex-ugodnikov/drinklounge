@@ -4,8 +4,22 @@
 <div class="single-cocktail">
   <a href="/drinks/{{this.idDrink}}"><img src="{{this.strDrinkThumb}}" alt="" width="100"></a>
   <p>{{this.strDrink}} / {{ this.strAlcoholic }}</p>
+
+  <h3>Instructions</h3>
+  <p>{{this.strInstructions}}</p>
+  <hr>
+  {{!-- Need to find a way to iterate across ingredients to avoid hard-coding X ingredients in the list - A.Garcia --}}
+  <h3>Ingredients</h3>
+  <ul>
+    <li>{{this.strIngredient1}}</li>
+    <li>{{this.strIngredient2}}</li>
+    <li>{{this.strIngredient3}}</li>
+    <li>{{this.strIngredient4}}</li>
+  </ul>
 </div>
 {{/each}}
+<br />
+<h2>Comments</h2>
 {{#unless post.comments}}
 <p>No comments yet!</p>
 {{/unless}}
