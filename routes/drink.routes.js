@@ -84,7 +84,9 @@ router.get('/search', (req, res, next) => {
 router.get('/random', (req, res, next) => {
   axios.get(`https://www.thecocktaildb.com/api/json/v1/1/random.php`).then(responseFromApi => {
       console.log(responseFromApi.data);
-      res.render('drinks/details.hbs', responseFromApi.data.drinks);
+      res.render('drinks/details.hbs', {
+        cocktails: responseFromApi.data.drinks
+      });
     })
     .catch(err => console.log(`error getting drink details: ${err}`))
 });
@@ -92,14 +94,14 @@ router.get('/random', (req, res, next) => {
 //GET route - show details for a single drink
 
 router.get('/drinks/:id', (req, res, next) => {
-  const drinkId = req.query;
+  const drinkId = req.params.id;
 
   axios.get(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drinkId}`)
     .then(responseFromApi => {
       console.log(responseFromApi.data);
       res.render('drinks/details.hbs', {
-        idDrink: drinkId,
-        cocktails: responseFromApi.data.drinks
+        cocktails: responseFromApi.data.drinks,
+        idDrink: drinkId
       });
     })
 })

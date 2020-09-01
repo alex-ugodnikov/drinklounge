@@ -1,12 +1,11 @@
-{{#if cocktails}}
-
+{{#each cocktails}}
 <h2>{{this.strDrink}}</h2>
 
 <div class="single-cocktail">
   <a href="/drinks/{{this.idDrink}}"><img src="{{this.strDrinkThumb}}" alt="" width="100"></a>
   <p>{{this.strDrink}} / {{ this.strAlcoholic }}</p>
 </div>
-
+{{/each}}
 {{#unless post.comments}}
 <p>No comments yet!</p>
 {{/unless}}
@@ -14,8 +13,6 @@
 {{#each post.comments}}
 <p> <b> {{ this.author.username }} </b>: {{ this.content }} </p>
 {{/each}}
-
-{{/if}}
 
 <hr>
 <h3> Add a comment </h3>
