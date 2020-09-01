@@ -12,29 +12,57 @@
 <div id="background">
 <body>
   <nav>
-    <ul>
-      <li id="to-left">
+    <div id="navbar">
+      <div id="to-left">
         <p><a href="/"> Drink Lounge </a></p>
-      </li>
-
-      <li id="to-right">
+      </div>
         <div id="to-center">
-          <a href="/alldrinks">All Drinks</a> <span> | </span>
-          <a href="/random">Random Drink</a> <span> | </span>
+            <div class="nav-button" id="button-e">
+            <div id="circle"></div>
+          <a href="/alldrinks">All Drinks</a>
+          </div>
+          <span> | </span>
+            <div class="nav-button" id="button-e">
+            <div id="circle"></div>
+          <a href="/random">Random Drink</a> 
+          </div>
+          <span> | </span>
+            <div class="nav-button" id="button-e">
+            <div id="circle"></div>
           <a href="/search">Search Drinks</a>
+          </div>  
         </div>
+
+      <div id="to-right">
         {{#if user}}
-        <a href="/profile"> {{user.username}} </a> <span> | </span>
+            <div class="nav-button" id="button-e">
+            <div id="circle"></div>
+        <a href="/profile"> {{user.username}} </a>
+        </div> 
+        <span> | </span>
         {{!-- <a href="/post-create">Add a post</a>  --}}
+
+          <div class="nav-button" id="button-e">
+          <div id="circle"></div>
         <form id="logout-form" action="/logout" method="POST">
           <button>Logout</button>
         </form>
+        </div>
+
         {{else}}
-        <a href="/signup">Signup</a> <span> | </span>
-        <a href="/login">Login</a> <span> | </span>
+          <div class="nav-button" id="button-e">
+          <div id="circle"></div>
+        <a href="/signup">Signup</a> 
+        </div>
+        <span> | </span>
+
+        <div class="nav-button" id="button-e">
+        <div id="circle"></div>
+        <a href="/login">Login</a>
+        </div>
         {{/if}}
-      </li>
-    </ul>
+      </div> 
+</div>
   </nav>
 
   {{{body}}}
