@@ -74,12 +74,6 @@ ul li {
   line-height: 20px;
 }
 
-#to-right {
-  display: flex;
-  align-items: center;
-  float: right;
-
-}
 
 #logout-form {
   margin: 0;
@@ -100,27 +94,9 @@ ul li {
   margin: 0;
 }
 
-#to-right span {
-  color: #43a3e6;
-  font-size: 1.5em;
-}
-
 #form h2 {
   display: flex;
   justify-content: center;
-}
-
-#to-left {
-  float: left;
-}
-
-#to-left p a {
-  color: #000;
-  font-weight: bold;
-  font-size: 2em;
-}
-#to-center {
-  margin-right: 575px;
 }
 
 #land-head{
@@ -132,6 +108,7 @@ ul li {
   text-align: center;
   justify-content: center;
   border-bottom: 1px solid black;
+  font-size: 1.2em;
 }
 
 #land-content{
@@ -281,3 +258,90 @@ input[type=text], .search-field {
   background-color: rgba(255, 255, 255, 0.1);
   font-size: 18px;
 }
+
+#navbar{
+  display: flex;
+  justify-content: space-between;
+  height: 55px;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+
+#to-center{
+  margin: 0;
+  color: white;
+  font-size: 1.2em;
+}
+
+#to-right{
+  font-size: 1.2em;
+}
+
+#to-right span {
+  color: white;
+  font-size: 1.5em;
+}
+
+#to-left {
+  float: left;
+}
+
+#to-left p a {
+  color: #000;
+  font-weight: bold;
+  font-size: 2em;
+}
+
+.nav-button {
+  display: inline-flex;
+  height: 40px;
+  width: 150px;
+  border: 2px solid #BFC0C0;
+  margin: 5px 5px;
+  color: #BFC0C0;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-size: .8em;
+  letter-spacing: 1.5px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+#button-e {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+#button-e a {
+  position: relative;
+  transition: all .45s ease-Out;
+  font-size: 1.1em;
+}
+
+#circle {
+  width: 0%;
+  height: 0%;
+  opacity: 0;
+  line-height: 40px;
+  border-radius: 50%;
+  background: #BFC0C0;
+  position: absolute;
+  transition: all .5s ease-Out;
+  top: 20px;
+  left: 70px;
+}
+
+#button-e:hover #circle {
+  width: 200%;
+  height: 500%;
+  opacity: 1;
+  top: -70px;
+  left: -70px;
+}
+
+#button-e:hover a {
+  color: #2D3142;
+}
+
