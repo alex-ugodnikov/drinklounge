@@ -5,7 +5,7 @@ body {
 }
 
 a {
-  color: #00b7ff;
+  color: #ffffff;
   text-decoration: none;
   font-size: 1.5em;
 }
@@ -153,50 +153,6 @@ ul li {
   color: #fff;
 }
 
-.details-button {
-  background: rgba(255, 255, 255, 0);
-  background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0), #035809);
-  background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0), #035809);
-  background-image: -ms-linear-gradient(top, rgba(255, 255, 255, 0), #035809);
-  background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0), #035809);
-  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #035809);
-  -webkit-border-radius: 20px;
-  -moz-border-radius: 20px;
-  border-radius: 20px;
-  color: #FFFFFF;
-  font-family: Open Sans;
-  font-size: large;
-  font-weight: 400;
-  padding: 3px;
-  box-shadow: 1px 1px 20px 0px #000000;
-  -webkit-box-shadow: 1px 1px 20px 0px #000000;
-  -moz-box-shadow: 1px 1px 20px 0px #000000;
-  text-shadow: 1px 1px 20px #000000;
-  border: solid #144015 0px;
-  text-decoration: none;
-  display: inline-block;
-  cursor: pointer;
-  text-align: center;
-  }
-  
-  .details-button:hover {
-
-  border: solid #FFFFFF 1px;
-  background: rgba(255, 255, 255, 0);
-  background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0), #16811E);
-  background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0), #16811E);
-  background-image: -ms-linear-gradient(top, rgba(255, 255, 255, 0), #16811E);
-  background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0), #16811E);
-  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #16811E);
-  -webkit-border-radius: 20px;
-  -moz-border-radius: 20px;
-  border-radius: 20px;
-  text-decoration: none;
-  -webkit-border-radius: 20px;
-  -moz-border-radius: 20px;
-  border-radius: 20px;
-  text-decoration: none;
-  }
 .search-container {
   color: white;
   text-align: center;
@@ -205,50 +161,6 @@ ul li {
 .browse-cocktails a {
   padding: 8px 5px;
   color: #FFFFFF;
-}
-
-.search-button{
-  background: rgba(255, 255, 255, 0);
-  background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0), #035809);
-  background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0), #035809);
-  background-image: -ms-linear-gradient(top, rgba(255, 255, 255, 0), #035809);
-  background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0), #035809);
-  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #035809);
-  -webkit-border-radius: 20px;
-  -moz-border-radius: 20px;
-  border-radius: 20px;
-  color: #FFFFFF;
-  font-family: Open Sans;
-  font-size: large;
-  font-weight: 400;
-  padding: 3px;
-  box-shadow: 1px 1px 20px 0px #000000;
-  -webkit-box-shadow: 1px 1px 20px 0px #000000;
-  -moz-box-shadow: 1px 1px 20px 0px #000000;
-  text-shadow: 1px 1px 20px #000000;
-  border: solid #144015 0px;
-  text-decoration: none;
-  display: inline-block;
-  cursor: pointer;
-  text-align: center;
-}
-
-.search-button:hover {
-  border: solid #FFFFFF 1px;
-  background: rgba(255, 255, 255, 0);
-  background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0), #16811E);
-  background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0), #16811E);
-  background-image: -ms-linear-gradient(top, rgba(255, 255, 255, 0), #16811E);
-  background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0), #16811E);
-  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #16811E);
-  -webkit-border-radius: 20px;
-  -moz-border-radius: 20px;
-  border-radius: 20px;
-  text-decoration: none;
-  -webkit-border-radius: 20px;
-  -moz-border-radius: 20px;
-  border-radius: 20px;
-  text-decoration: none;
 }
 
 input[type=text], .search-field {
@@ -262,7 +174,7 @@ input[type=text], .search-field {
 #navbar{
   display: flex;
   justify-content: space-between;
-  height: 55px;
+  height: 45px;
   background-color: rgba(255, 255, 255, 0.1);
 }
 
@@ -294,7 +206,7 @@ input[type=text], .search-field {
 
 .nav-button {
   display: inline-flex;
-  height: 40px;
+  height: 30px;
   width: 150px;
   border: 2px solid #BFC0C0;
   margin: 5px 5px;
@@ -345,3 +257,19 @@ input[type=text], .search-field {
   color: #2D3142;
 }
 
+.search-button {
+  display: inline-flex;
+  height: 30px;
+  border: 2px solid #BFC0C0;
+  margin: 5px 5px;
+  color: #BFC0C0;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-size: 1.2em;
+  font-weight: 300;
+  letter-spacing: 1.5px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: #666;
+}
