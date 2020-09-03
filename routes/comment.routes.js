@@ -9,31 +9,35 @@ router.post('/drinks/:drinkId/comment', (req, res, next) => {
   const { drinkId } = req.params;
   const { content } = req.body;
 
-  // 1. find a post based on the id from the url
-  Drink.findOne({drinkId: 178316})
+  // 1. find a Drink based on the id from the url
+  Drink.findOne({drinkId})
     .then(drinkFromDb => {
-      // 2. create a new comment
+      // Check if the Drink is already in our Db, if not, we need to create it
         if (drinkFromDb === null) {
           console.log('No drink with this ID', drinkId)
           //Create a record of the drink with the id
           Drink.create({drinkId})
           .then(newDrinkFromDb => {
-            drinkFromDb = newDrinkFromDb;
-          })
-          .catch(err => console.log(`Err while creating a new drink: ${err}`));
-        } 
-        Comment.create({ content, author: req.session.loggedInUser._id })
+            Comment.create({ content, author: req.session.loggedInUser._id })
             .then(newCommentFromDb => {
-              // console.log(newCommentFromDb);
-              // 3. push the new comment's id into an array of comments that belongs to the found post
-              drinkFromDb.comments.push(newCommentFromDb._id);
-              // 4. save the post with the new comments on it to the database
-              drinkFromDb
-                .save()
-                .then(updatedPost => res.redirect(`/drinks/${updatedPost._id}`))
+              // Save the post with the new comments on it to the database
+              Drink.findByIdAndUpdate(newDrinkFromDb._id, {$push:{comments:newCommentFromDb._id}})
+                .then(updatedDrink => res.redirect(`/drinks/${updatedDrink.drinkId}`))
                 .catch(err => console.log(`Err while saving a comment in a drink: ${err}`));
             })
             .catch(err => console.log(`Err while creating a comment on a drink: ${err}`));
+          })
+          .catch(err => console.log(`Err while creating a new drink: ${err}`));
+        }else{
+                Comment.create({ content, author: req.session.loggedInUser._id })
+                .then(newCommentFromDb => {
+                  // Save the post with the new comments on it to the database
+                  Drink.findByIdAndUpdate(drinkFromDb._id, {$push:{comments:newCommentFromDb._id}})
+                    .then(updatedDrink => res.redirect(`/drinks/${updatedDrink.drinkId}`))
+                    .catch(err => console.log(`Err while saving a comment in a drink: ${err}`));
+                })
+                .catch(err => console.log(`Err while creating a comment on a drink: ${err}`));       
+        } 
         })
     .catch(err => console.log(`Err while getting a single drink when creating a comment: ${err}`));
 });
