@@ -116,26 +116,26 @@ router.get('/drinks/:id', (req, res, next) => {
 
 // GET route - show the details of a single post
 
-router.get('/posts/:postId', (req, res, next) => {
-  Post.findById(req.params.postId)
-    // author of a post
-    //           VV
-    .populate('author comments') // populate both fields - the same as populate one and then populate the other one
-    // deep populate ===> populating already populated field
-    // check this article: https://stackoverflow.com/questions/18867628/mongoose-deep-population-populate-a-populated-field
-    .populate({
-      path: 'comments',
-      populate: {
-        path: 'author' // author of a comment
-      }
-    })
-    .then(foundPost => {
-      // console.log(foundPost);
-      res.render('posts/details.hbs', {
-        post: foundPost
-      });
-    })
-    .catch(err => console.log(`Err while getting a single post: ${err}`));
-});
+// router.get('/posts/:postId', (req, res, next) => {
+//   Post.findById(req.params.postId)
+//     // author of a post
+//     //           VV
+//     .populate('author comments') // populate both fields - the same as populate one and then populate the other one
+//     // deep populate ===> populating already populated field
+//     // check this article: https://stackoverflow.com/questions/18867628/mongoose-deep-population-populate-a-populated-field
+//     .populate({
+//       path: 'comments',
+//       populate: {
+//         path: 'author' // author of a comment
+//       }
+//     })
+//     .then(foundPost => {
+//       // console.log(foundPost);
+//       res.render('posts/details.hbs', {
+//         post: foundPost
+//       });
+//     })
+//     .catch(err => console.log(`Err while getting a single post: ${err}`));
+// });
 
 module.exports = router;
