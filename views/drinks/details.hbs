@@ -1,41 +1,51 @@
-{{#each cocktails}}
-<h2>{{this.strDrink}}</h2>
+<div id="detail-layout">
+  {{#each cocktails}}
+  <div class="cocktail-detail">
+    <h2>{{this.strDrink}}</h2>
 
-<div class="single-cocktail">
-  <a href="/drinks/{{this.idDrink}}"><img src="{{this.strDrinkThumb}}" alt="" width="100"></a>
-  <p>{{this.strDrink}} / {{ this.strAlcoholic }}</p>
+    <a href="/drinks/{{this.idDrink}}"><img src="{{this.strDrinkThumb}}" alt="" width="250"></a>
+    <p>{{this.strDrink}} / {{ this.strAlcoholic }}</p>
 
-  <h3>Instructions</h3>
-  <p>{{this.strInstructions}}</p>
-  <hr>
-  {{!-- Need to find a way to iterate across ingredients to avoid hard-coding X ingredients in the list - A.Garcia --}}
-  <h3>Ingredients</h3>
-  <ul>
-    <li>{{this.strMeasure1}} {{this.strIngredient1}}</li>
-    <li>{{this.strMeasure2}} {{this.strIngredient2}}</li>
-    <li>{{this.strMeasure3}} {{this.strIngredient3}}</li>
-    <li>{{this.strMeasure4}} {{this.strIngredient4}}</li>
-    <li>{{this.strMeasure5}} {{this.strIngredient5}}</li>
-    <li>{{this.strMeasure6}} {{this.strIngredient6}}</li>
-    <li>{{this.strMeasure7}} {{this.strIngredient7}}</li>
-    <li>{{this.strMeasure8}} {{this.strIngredient8}}</li>
-  </ul>
+    <h3>Instructions</h3>
+    <p>{{this.strInstructions}}</p>
+    {{!-- Need to find a way to iterate across ingredients to avoid hard-coding X ingredients in the list - A.Garcia --}}
+
+     <div id="detail-ingr">
+    <h3>Ingredients</h3>
+   
+    <ul>
+      <li>{{this.strMeasure1}} {{this.strIngredient1}}</li>
+      <li>{{this.strMeasure2}} {{this.strIngredient2}}</li>
+      <li>{{this.strMeasure3}} {{this.strIngredient3}}</li>
+      <li>{{this.strMeasure4}} {{this.strIngredient4}}</li>
+      <li>{{this.strMeasure5}} {{this.strIngredient5}}</li>
+      <li>{{this.strMeasure6}} {{this.strIngredient6}}</li>
+      <li>{{this.strMeasure7}} {{this.strIngredient7}}</li>
+      <li>{{this.strMeasure8}} {{this.strIngredient8}}</li>
+    </ul>
+  </div>
+  </div>
+  {{/each}}
+
+
+  <div>
+    <h2>Comments</h2>
+    {{#unless post.comments}}
+    <p>No comments yet!</p>
+    {{/unless}}
+
+    {{#each post.comments}}
+    <p> <b> {{ this.author.username }} </b>: {{ this.content }} </p>
+    {{/each}}
+  </div>
+
+  <div>
+    <h3> Add a comment </h3>
+
+    <form action="/drinks/{{idDrink}}/comment" method="POST">
+      <textarea name="content" cols="50" rows="10"></textarea>
+      <button type="submit"> Comment </button>
+    </form>
+
+  </div>
 </div>
-{{/each}}
-<br />
-<h2>Comments</h2>
-{{#unless post.comments}}
-<p>No comments yet!</p>
-{{/unless}}
-
-{{#each post.comments}}
-<p> <b> {{ this.author.username }} </b>: {{ this.content }} </p>
-{{/each}}
-
-<hr>
-<h3> Add a comment </h3>
-
-<form action="/drinks/{{idDrink}}/comment" method="POST">
-  <textarea name="content" cols="50" rows="10"></textarea>
-  <button type="submit"> Comment </button>
-</form>
