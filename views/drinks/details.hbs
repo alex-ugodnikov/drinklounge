@@ -58,3 +58,24 @@
   </div>
 {{/if}}
 </div>
+<<<<<<< HEAD
+{{/each}}
+<br />
+<h2>Comments</h2>
+{{#unless post.comments}}
+<p>No comments yet!</p>
+{{/unless}}
+
+{{#each post.comments}}
+<p> <b> {{ this.author.username }} </b>: {{ this.content }} </p>
+{{/each}}
+
+<hr>
+<h3> Add a comment </h3>
+
+<form action="/posts/{{post._id}}/comment" method="POST">
+  <textarea name="content" cols="50" rows="10"></textarea>
+  <button type="submit"> Comment </button>
+</form>
+=======
+>>>>>>> 9255b8354568313a3d2a97b789b0c5945123989a
