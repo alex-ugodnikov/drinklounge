@@ -7,7 +7,12 @@ const Post = require('../models/Post.model');
 // require image uploader
 
 const fileUploader = require('../configs/cloudinary.config');
-const { response } = require('express');
+const {
+  response
+} = require('express');
+
+//require user model
+const User = require('../models/User.model');
 
 /* GET all drinks page */
 
@@ -32,7 +37,10 @@ router.get('/alldrinks', (req, res, next) => {
 
 router.get('/search', (req, res, next) => {
   // Pull variables from search query
-  const { letter, s } = req.query;
+  const {
+    letter,
+    s
+  } = req.query;
 
   // Checking if any search variables exist = run apropriate query
 
@@ -91,53 +99,82 @@ router.get('/random', (req, res, next) => {
 
 //GET route - show details for a single drink
 
+//pseudo code to manage array of ingredients with measurements for any drink:
+//iterate over every ingredient & measurement
+//if ingredient has an associated measurement
+//concatenate the strings ("tequila - 1.5")
+//else push ingredient as is
+//ingredients key (an array of k/v pairs)
+
 router.get('/drinks/:id', (req, res, next) => {
   const drinkId = req.params.id;
-  // const ingredients = [responseFromApi.data.strIngredient1, responseFromApi.data.strMeasure1];
-  // const separator = '-';
   axios.get(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drinkId}`).then(responseFromApi => {
+    // const ingredients = [responseFromApi.data.strIngredient1, responseFromApi.data.strMeasure1];
+    // const separator = '-';
     //console.log(responseFromApi.data.strIngredient1);
-    //pseudo code to manage array of ingredients with measurements for any drink:
     // function combineIngredientsAndMeasures(object, keys, sep) {
     //   return keys
     //     .map(key => object[key])
     //     .filter(v => v)
     //     .join(sep);
     // }
-    //iterate over every ingredient & measurement
-    //if ingredient has an associated measurement
-    //concatenate the strings ("tequila - 1.5")
-    //else push ingredient as is
+
     res.render('drinks/details.hbs', {
       cocktails: responseFromApi.data.drinks,
       idDrink: drinkId
-      //ingredients key (an array of k/v pairs)
     });
   });
 });
 
+// POST route - add a drink to user's Favorites list
+
+router.post('drinks/:drinkId/addFavorite', (req, res, next) => {
+  const {
+    drinkId
+  } = req.params;
+  User.findByIdAndUpdate(req.session.loggedInUser._id, {
+      favorites: drinkId
+    })
+    .then(newFavorite => {
+      User.save();
+      console.log(`favorite added: ${newFavorite}`)
+    })
+    .catch(err => {
+      console.log(`error adding favorite: ${err}`)
+    })
+})
+
+//POST route - remove a drink from user's Favorites list
+
+// router.post('drinks/:drinkId/removeFavorite', (req, res, next) => {
+//   const {
+//     drinkId
+//   } = req.params;
+//   User.findByIdAndUpdate(req.session.loggedInUser._id, )
+// })
+
 // GET route - show the details of a single post
 
-// router.get('/posts/:postId', (req, res, next) => {
-//   Post.findById(req.params.postId)
-//     // author of a post
-//     //           VV
-//     .populate('author comments') // populate both fields - the same as populate one and then populate the other one
-//     // deep populate ===> populating already populated field
-//     // check this article: https://stackoverflow.com/questions/18867628/mongoose-deep-population-populate-a-populated-field
-//     .populate({
-//       path: 'comments',
-//       populate: {
-//         path: 'author' // author of a comment
-//       }
-//     })
-//     .then(foundPost => {
-//       // console.log(foundPost);
-//       res.render('posts/details.hbs', {
-//         post: foundPost
-//       });
-//     })
-//     .catch(err => console.log(`Err while getting a single post: ${err}`));
-// });
+router.get('/posts/:postId', (req, res, next) => {
+  Post.findById(req.params.postId)
+    // author of a post
+    //           VV
+    .populate('author comments') // populate both fields - the same as populate one and then populate the other one
+    // deep populate ===> populating already populated field
+    // check this article: https://stackoverflow.com/questions/18867628/mongoose-deep-population-populate-a-populated-field
+    .populate({
+      path: 'comments',
+      populate: {
+        path: 'author' // author of a comment
+      }
+    })
+    .then(foundPost => {
+      // console.log(foundPost);
+      res.render('posts/details.hbs', {
+        post: foundPost
+      });
+    })
+    .catch(err => console.log(`Err while getting a single post: ${err}`));
+});
 
 module.exports = router;
