@@ -20,7 +20,7 @@ router.post('/drinks/:drinkId/comment', (req, res, next) => {
           .then(newDrinkFromDb => {
             Comment.create({ content, author: req.session.loggedInUser._id })
             .then(newCommentFromDb => {
-              // Save the post with the new comments on it to the database
+              // Update the drink with new comments to the database
               Drink.findByIdAndUpdate(newDrinkFromDb._id, {$push:{comments:newCommentFromDb._id}})
                 .then(updatedDrink => res.redirect(`/drinks/${updatedDrink.drinkId}`))
                 .catch(err => console.log(`Err while saving a comment in a drink: ${err}`));
@@ -30,8 +30,8 @@ router.post('/drinks/:drinkId/comment', (req, res, next) => {
           .catch(err => console.log(`Err while creating a new drink: ${err}`));
         }else{
                 Comment.create({ content, author: req.session.loggedInUser._id })
-                .then(newCommentFromDb => {
-                  // Save the post with the new comments on it to the database
+                .then(newCommentFromDb => {              
+                  // Update the drink with new comments to the database
                   Drink.findByIdAndUpdate(drinkFromDb._id, {$push:{comments:newCommentFromDb._id}})
                     .then(updatedDrink => res.redirect(`/drinks/${updatedDrink.drinkId}`))
                     .catch(err => console.log(`Err while saving a comment in a drink: ${err}`));
