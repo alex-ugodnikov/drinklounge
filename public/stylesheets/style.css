@@ -10,11 +10,6 @@ a {
   font-size: 1.5em;
 }
 
-form {
-  margin: 30px auto;
-  width: 380px;
-}
-
 form label {
   color: #666;
   display: inline-block;
@@ -23,8 +18,7 @@ form label {
   width: 100%;
 }
 
-form input,
-form button {
+form input {
   box-sizing: border-box;
   font-size: 14px;
   outline: 0;
@@ -33,7 +27,7 @@ form button {
   margin-bottom: 20px;
 }
 
-form button {
+/* form button {
   background: #43a3e6;
   border: 1px solid #43a3e6;
   border-radius: 4px;
@@ -45,8 +39,10 @@ form button {
   text-decoration: none;
   text-transform: uppercase;
   transition: 0.3s ease background;
-  /* width: 100%; */
+  width: 100%; 
 }
+  */
+ 
 
 form button:hover {
   background: #fff;
@@ -64,9 +60,8 @@ form button:hover {
 }
 
 ul {
-  border-bottom: 2px solid #43a3e6;
   height: 30px;
-  padding: 1em 0;
+  padding: 0px 0px 1em 0px;
   list-style-type: none;
 }
 
@@ -79,9 +74,10 @@ ul li {
   margin: 0;
   padding: 0;
   width: auto;
+  display: contents;
 }
 
-#logout-form button {
+/* #logout-form button {
   width: auto;
   text-transform: none;
   background: none;
@@ -92,7 +88,9 @@ ul li {
   font-size: 1.5em;
   display: inline-block;
   margin: 0;
-}
+  all: unset;
+  z-index: 1;
+} */
 
 #form h2 {
   display: flex;
@@ -220,16 +218,20 @@ input[type=text], .search-field {
   overflow: hidden;
 }
 
-#button-e {
+.button-e {
   position: relative;
   overflow: hidden;
   cursor: pointer;
 }
 
-#button-e a {
+.button-e a {
   position: relative;
   transition: all .45s ease-Out;
-  font-size: 1.1em;
+  font-size: 1.2em;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding-top: 14px;
 }
 
 #circle {
@@ -245,7 +247,7 @@ input[type=text], .search-field {
   left: 70px;
 }
 
-#button-e:hover #circle {
+.button-e:hover #circle {
   width: 200%;
   height: 500%;
   opacity: 1;
@@ -253,23 +255,158 @@ input[type=text], .search-field {
   left: -70px;
 }
 
-#button-e:hover a {
+.button-e:hover a {
   color: #2D3142;
 }
 
-.search-button {
-  display: inline-flex;
-  height: 30px;
-  border: 2px solid #BFC0C0;
-  margin: 5px 5px;
-  color: #BFC0C0;
-  text-transform: uppercase;
-  text-decoration: none;
+#search-button {
+    all: unset;
+    z-index: 1;
+    font-size: 1.5em;
+    width: 100%;
+    font-weight: 300;
+    font-size: 1.6em;
+}
+
+#search-button:hover {
+  color: black;
+}
+
+#search-button-div {
+  width: 380px;
+  margin: 0;
+}
+
+#logout-button {
+  all: unset;
+  z-index: 1;
   font-size: 1.2em;
+  font-weight: 200;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+#logout-button:hover {
+  color: #2D3142;
+}
+
+#login-form-button{
+  all: unset;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
   font-weight: 300;
-  letter-spacing: 1.5px;
+  font-size: 1.6em;
+  text-align: center;
+}
+
+#login-form-button:hover {
+  color: #2D3142;
+}
+
+#signup-form-button{
+  all: unset;
+  z-index: 1;
+  font-size: 1.2em;
+  width: 100%;
+  height: 100%;
+  font-weight: 300;
+  text-align: center;
+}
+
+#signup-form-button:hover {
+  color: #2D3142;
+}
+
+.cocktail-detail {
+  text-align: center;
+  color: white;
+  font-size: 1.5em;
+  padding-bottom: 1em;
+  width: auto;
+}
+.cocktail-detail img {
+  border: 2px solid;
+  border-color: rgba(255, 255, 255, 0.1);
+  padding: 3px;
+}
+
+#detail-layout {
+  display: flex;
+  flex-direction: column;
   align-items: center;
+}
+
+.cocktail-detail h3 {
+  font-size: 1.8em;
+  font-weight: 300;
+  margin-bottom: 18px;
+}
+
+.cocktail-detail p {
+ margin-bottom: 3px;
+ margin-top: 0%;
+}
+
+#comments-div{
+  color: white;
+  font-size: 1.2em;
+  border: 1px solid;
+  border-color: rgba(255, 255, 255, 0.1);
+  padding: 5px;
+}
+
+#comments-div h2{
+  margin-top: 0%;
+}
+
+#add-comment-div {
+  color: white;
+  text-align: center;
+  font-size: 1.5em;
+  width: 70vw;
+  align-items: center;
+}
+
+#add-comment-div form {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  overflow: hidden;
-  background-color: #666;
+  width: inherit;
+  align-items: center;
+}
+
+#add-comment-div textarea {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 1em;
+  width: inherit;
+  margin-bottom: 8px;
+}
+
+#add-comment-btn {
+  all: unset;
+  z-index: 1;
+  font-size: 1.2em;
+  width: 100%;
+  height: 100%;
+  font-weight: 300;
+  text-align: center;
+}
+
+#add-comment-btn:hover {
+  color: #2D3142;
+}
+
+#instructions-div{
+  border: 1px solid;
+  border-color: rgba(255, 255, 255, 0.1);
+  padding: 10px;
+  padding-top: 1px;
+  margin-top: 15px;
+
+}
+#instructions-div h3 {
+  margin-top: 2px;
 }
