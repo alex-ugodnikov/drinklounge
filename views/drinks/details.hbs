@@ -1,21 +1,24 @@
 <div id="detail-layout">
   {{#each cocktails}}
   <div class="cocktail-detail">
-    <h2>{{this.strDrink}}</h2>
+    <h2>{{this.strDrink}}</h2> <span>
+      <form action='drinks/{{idDrink}}/addFavorite' method="POST"><button id='fav-button' type='submit'>Add to
+          Favorites</button>
+    </span></form>
 
     <a href="/drinks/{{this.idDrink}}"><img src="{{this.strDrinkThumb}}" alt="" width="250"></a>
     <p>{{this.strDrink}} / {{ this.strAlcoholic }}</p>
 
-  <div id="instructions-div">
-    <h3>Instructions</h3>
-    <p>{{this.strInstructions}}</p>
-  </div>
+    <div id="instructions-div">
+      <h3>Instructions</h3>
+      <p>{{this.strInstructions}}</p>
+    </div>
     {{!-- Need to find a way to iterate across ingredients to avoid hard-coding X ingredients in the list - A.Garcia --}}
 
-     <div id="detail-ingr">
-    <h3>Ingredients</h3>
-   
-    
+    <div id="detail-ingr">
+      <h3>Ingredients</h3>
+
+
       <p>{{this.strMeasure1}} {{this.strIngredient1}}</p>
       <p>{{this.strMeasure2}} {{this.strIngredient2}}</p>
       <p>{{this.strMeasure3}} {{this.strIngredient3}}</p>
@@ -24,8 +27,8 @@
       <p>{{this.strMeasure6}} {{this.strIngredient6}}</p>
       <p>{{this.strMeasure7}} {{this.strIngredient7}}</p>
       <p>{{this.strMeasure8}} {{this.strIngredient8}}</p>
-   
-  </div>
+
+    </div>
   </div>
   {{/each}}
 
@@ -33,28 +36,28 @@
   <div id="comments-div">
     <h2>Comments</h2>
 
-{{#unless foundDrink.comments}}
-  <p>No comments yet!</p>
-{{/unless}}
- 
-{{#each foundDrink.comments}}
-  <p><b>{{this.author.username}}:</b> {{this.content}}<br/>
-  <small>Posted on: {{this.createdAt}}</small></p>
-{{/each}}
+    {{#unless foundDrink.comments}}
+    <p>No comments yet!</p>
+    {{/unless}}
+
+    {{#each foundDrink.comments}}
+    <p><b>{{this.author.username}}:</b> {{this.content}}<br />
+      <small>Posted on: {{this.createdAt}}</small></p>
+    {{/each}}
 
   </div>
 
-{{#if user}}
+  {{#if user}}
   <div id="add-comment-div">
     <h3> Add a comment </h3>
 
     <form action="/drinks/{{idDrink}}/comment" method="POST">
       <textarea name="content" cols="50" rows="10"></textarea>
       <div class="nav-button button-e" id="">
-      <div id="circle"></div>
-      <button id="add-comment-btn"type="submit"> Comment </button>
+        <div id="circle"></div>
+        <button id="add-comment-btn" type="submit"> Comment </button>
       </div>
     </form>
   </div>
-{{/if}}
+  {{/if}}
 </div>
