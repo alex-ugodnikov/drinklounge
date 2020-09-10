@@ -17,17 +17,17 @@
         <p><a href="/"> Drink Lounge </a></p>
       </div>
         <div id="to-center">
-            <div class="nav-button" id="button-e">
+            <div class="nav-button button-e" id="">
             <div id="circle"></div>
           <a href="/alldrinks">All Drinks</a>
           </div>
           <span> | </span>
-            <div class="nav-button" id="button-e">
+            <div class="nav-button button-e" id="">
             <div id="circle"></div>
           <a href="/random">Random Drink</a> 
           </div>
           <span> | </span>
-            <div class="nav-button" id="button-e">
+            <div class="nav-button button-e" id="">
             <div id="circle"></div>
           <a href="/search">Search Drinks</a>
           </div>  
@@ -35,28 +35,30 @@
 
       <div id="to-right">
         {{#if user}}
-            <div class="nav-button" id="button-e">
+            <div class="nav-button button-e" id="">
             <div id="circle"></div>
         <a href="/profile"> {{user.username}} </a>
         </div> 
         <span> | </span>
         {{!-- <a href="/post-create">Add a post</a>  --}}
 
-          <div class="nav-button" id="button-e">
+
+        <form id="logout-form" action="/logout" method="POST">
+          <div class="nav-button button-e" id="">
           <div id="circle"></div>
-          <form id="logout-form" action="/logout" method="POST">
-          <button>Logout</button>
+          <button id="logout-button">Logout</button>
+          </div>
         </form>
-        </div>
+        
 
         {{else}}
-          <div class="nav-button" id="button-e">
+          <div class="nav-button button-e" id="">
           <div id="circle"></div>
         <a href="/signup">Signup</a> 
         </div>
         <span> | </span>
 
-        <div class="nav-button" id="button-e">
+        <div class="nav-button button-e" id="">
         <div id="circle"></div>
         <a href="/login">Login</a>
         </div>
