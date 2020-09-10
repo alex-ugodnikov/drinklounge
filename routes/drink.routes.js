@@ -4,7 +4,6 @@ const axios = require('axios');
 
 const Drink = require('../models/Drink.model'); 
 const Comment = require('../models/Comment.model'); 
-const User = require('../models/User.model'); 
 
 // require image uploader
 
