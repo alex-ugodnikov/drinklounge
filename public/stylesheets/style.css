@@ -10,12 +10,6 @@ a {
   font-size: 1.5em;
 }
 
-form {
-  margin: 30px auto;
-  width: 380px;
-  text-align: center;
-}
-
 form label {
   color: #666;
   display: inline-block;
@@ -328,13 +322,91 @@ input[type=text], .search-field {
 .cocktail-detail {
   text-align: center;
   color: white;
-  font-size: 1.2em;
-  padding-bottom: 4em;
+  font-size: 1.5em;
+  padding-bottom: 1em;
   width: auto;
+}
+.cocktail-detail img {
+  border: 2px solid;
+  border-color: rgba(255, 255, 255, 0.1);
+  padding: 3px;
 }
 
 #detail-layout {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.cocktail-detail h3 {
+  font-size: 1.8em;
+  font-weight: 300;
+  margin-bottom: 18px;
+}
+
+.cocktail-detail p {
+ margin-bottom: 3px;
+ margin-top: 0%;
+}
+
+#comments-div{
+  color: white;
+  font-size: 1.2em;
+  border: 1px solid;
+  border-color: rgba(255, 255, 255, 0.1);
+  padding: 5px;
+}
+
+#comments-div h2{
+  margin-top: 0%;
+}
+
+#add-comment-div {
+  color: white;
+  text-align: center;
+  font-size: 1.5em;
+  width: 70vw;
+  align-items: center;
+}
+
+#add-comment-div form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: inherit;
+  align-items: center;
+}
+
+#add-comment-div textarea {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 1em;
+  width: inherit;
+  margin-bottom: 8px;
+}
+
+#add-comment-btn {
+  all: unset;
+  z-index: 1;
+  font-size: 1.2em;
+  width: 100%;
+  height: 100%;
+  font-weight: 300;
+  text-align: center;
+}
+
+#add-comment-btn:hover {
+  color: #2D3142;
+}
+
+#instructions-div{
+  border: 1px solid;
+  border-color: rgba(255, 255, 255, 0.1);
+  padding: 10px;
+  padding-top: 1px;
+  margin-top: 15px;
+
+}
+#instructions-div h3 {
+  margin-top: 2px;
 }
