@@ -126,7 +126,21 @@ router.get('/random', (req, res, next) => {
 
 router.get('/drinks/:id', (req, res, next) => {
   const drinkId = req.params.id;
+  axios.get(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drinkId}`).then(responseFromApi => {
+    // const ingredients = [responseFromApi.data.strIngredient1, responseFromApi.data.strMeasure1];
+    // const separator = '-';
+    //console.log(responseFromApi.data.strIngredient1);
+    // function combineIngredientsAndMeasures(object, keys, sep) {
+    //   return keys
+    //     .map(key => object[key])
+    //     .filter(v => v)
+    //     .join(sep);
+    // }
 
+    res.render('drinks/details.hbs', {
+      cocktails: responseFromApi.data.drinks,
+      idDrink: drinkId
+    });
   // const ingredients = [responseFromApi.data.strIngredient1, responseFromApi.data.strMeasure1];
   // const separator = '-';
   axios.get(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drinkId}`)
