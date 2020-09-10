@@ -126,8 +126,6 @@ router.get('/random', (req, res, next) => {
 
 router.get('/drinks/:id', (req, res, next) => {
   const drinkId = req.params.id;
-<<<<<<< HEAD
-<<<<<<< HEAD
   axios.get(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drinkId}`).then(responseFromApi => {
     // const ingredients = [responseFromApi.data.strIngredient1, responseFromApi.data.strMeasure1];
     // const separator = '-';
@@ -143,10 +141,6 @@ router.get('/drinks/:id', (req, res, next) => {
       cocktails: responseFromApi.data.drinks,
       idDrink: drinkId
     });
-=======
-=======
-
->>>>>>> afad00ff5d5eb1923ea0b54aeb179c2ce726da3f
   // const ingredients = [responseFromApi.data.strIngredient1, responseFromApi.data.strMeasure1];
   // const separator = '-';
   axios.get(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drinkId}`)
@@ -183,10 +177,6 @@ router.get('/drinks/:id', (req, res, next) => {
         });
       })
       .catch(err => console.log(`Err while getting a single post: ${err}`));
-<<<<<<< HEAD
->>>>>>> 097cab7079b5abeb2bce342d18d25c23d228e0cc
-=======
->>>>>>> afad00ff5d5eb1923ea0b54aeb179c2ce726da3f
   });
 });
 
