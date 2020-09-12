@@ -152,18 +152,38 @@ router.get('/drinks/:id', (req, res, next) => {
         }
       })
       .then(foundDrink => {
-        console.log(foundDrink);
-        let data = {
-          cocktails: responseFromApi.data.drinks,
-          idDrink: drinkId,
-          foundDrink
-          //ingredients key (an array of k/v pairs)
-        }
-        //In Progress: Need to implement check to update Add to Favorites button to display Remove From Favorites if user already has drink in Favorites list - A. Garcia
+        // console.log(foundDrink);
+        // console.log(req.session.loggedInUser.favorites)
 
-        //update isAddedToFavorites value to TRUE if user model already contains drinkId in Favorites.
-        data.isAddedToFavorites = req.session.loggedInUser.favorites.includes(data.drinkId);
-        res.render('drinks/details.hbs', data);
+        // Check if the Drink is already in our Db, if not, we need to create it
+        if (foundDrink === null) {
+          console.log('No drink with this ID', drinkId)
+          //Create a record of the drink with the id
+          Drink.create({
+              drinkId
+            })
+            .then(newDrink => {
+              let data = {
+                cocktails: responseFromApi.data.drinks,
+                idDrink: drinkId,
+                newDrink
+              }
+              //update isAddedToFavorites value to TRUE if user model already contains drinkId in Favorites.
+              newDrink.isAddedToFavorites = req.session.loggedInUser.favorites.includes(data.idDrink);
+              res.render('drinks/details.hbs', data);
+              // console.log(newDrink.isAddedToFavorites);
+            })
+        } else {
+          let data = {
+            cocktails: responseFromApi.data.drinks,
+            idDrink: drinkId,
+            foundDrink
+          }
+          //update isAddedToFavorites value to TRUE if user model already contains drinkId in Favorites.
+          foundDrink.isAddedToFavorites = req.session.loggedInUser.favorites.includes(data.idDrink);
+          res.render('drinks/details.hbs', data);
+          // console.log(foundDrink.isAddedToFavorites);
+        }
       })
       .catch(err => console.log(`Err while getting a drink's details: ${err}`));
   });
