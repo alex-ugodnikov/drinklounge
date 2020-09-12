@@ -4,9 +4,15 @@
     <h2>{{this.strDrink}}</h2> <span>
       {{!-- user prefaced with ../ to check a level above cocktails as user is not inside cocktails object --}}
       {{#if ../user}}
+      {{#unless isAddedToFavorites}}
       <form action='{{idDrink}}/addFavorite' method="POST"><button id='fav-button' type='submit'>Add to
           Favorites</button>
     </span></form>
+    {{else}}
+    <form action='{{idDrink}}/removeFavorite' method="POST"><button id='fav-button' type='submit'>Remove from
+        Favorites</button>
+      </span></form>
+    {{/unless}}
     {{else}}
     <p>Sign in to add to Favorites</p>
     {{/if}}
