@@ -174,7 +174,7 @@ router.get('/drinks/:id', (req, res, next) => {
 
 // POST route - add a drink to user's Favorites list
 
-router.post('/:drinkId/addFavorite', (req, res, next) => {
+router.post('/drinks/:drinkId/addFavorite', (req, res, next) => {
   const {
     drinkId
   } = req.params;

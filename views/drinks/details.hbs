@@ -2,13 +2,15 @@
   {{#each cocktails}}
   <div class="cocktail-detail">
     <h2>{{this.strDrink}}</h2> <span>
-      {{#if user}}
-      <form action='drinks/{{idDrink}}/addFavorite' method="POST"><button id='fav-button' type='submit'>Add to
+      {{!-- user prefaced with ../ to check a level above cocktails as user is not inside cocktails object --}}
+      {{#if ../user}}
+      <form action='{{idDrink}}/addFavorite' method="POST"><button id='fav-button' type='submit'>Add to
           Favorites</button>
     </span></form>
     {{else}}
     <p>Sign in to add to Favorites</p>
     {{/if}}
+
     <a href="/drinks/{{this.idDrink}}"><img src="{{this.strDrinkThumb}}" alt="" width="250"></a>
     <p>{{this.strDrink}} / {{ this.strAlcoholic }}</p>
 
