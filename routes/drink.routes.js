@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios');
 
-const Drink = require('../models/Drink.model'); 
-const Comment = require('../models/Comment.model'); 
+const Drink = require('../models/Drink.model');
+const Comment = require('../models/Comment.model');
 
 // require image uploader
 
@@ -92,25 +92,28 @@ router.get('/random', (req, res, next) => {
     .then(responseFromApi => {
       const drinkId = responseFromApi.data.drinks[0].drinkid;
       //console.log(responseFromApi.data.drinks[0].idDrink);
-      Drink.findOne({drinkId})
-      .populate('author comments')
-      .populate({
-        // we are populating author in the previously populated comments
-        path: 'comments',
-        populate: {
-          path: 'author',
-          model: 'User'
-        }})
-      .then(foundDrink => {    
-        console.log(foundDrink);  
-        res.render('drinks/details.hbs', {
-          cocktails: responseFromApi.data.drinks,
-          idDrink: drinkId,
-          foundDrink
-          //ingredients key (an array of k/v pairs)
-        });
-      })
-      .catch(err => console.log(`Err while getting a single post: ${err}`));
+      Drink.findOne({
+          drinkId
+        })
+        .populate('author comments')
+        .populate({
+          // we are populating author in the previously populated comments
+          path: 'comments',
+          populate: {
+            path: 'author',
+            model: 'User'
+          }
+        })
+        .then(foundDrink => {
+          console.log(foundDrink);
+          res.render('drinks/details.hbs', {
+            cocktails: responseFromApi.data.drinks,
+            idDrink: drinkId,
+            foundDrink
+            //ingredients key (an array of k/v pairs)
+          });
+        })
+        .catch(err => console.log(`Err while getting a single post: ${err}`));
     })
     .catch(err => console.log(`error getting drink details: ${err}`));
 });
@@ -144,31 +147,34 @@ router.get('/drinks/:id', (req, res, next) => {
       //concatenate the strings ("tequila - 1.5")
       //else push ingredient as is
 
-      Drink.findOne({drinkId})
-      .populate('author comments')
-      .populate({
-        // we are populating author in the previously populated comments
-        path: 'comments',
-        populate: {
-          path: 'author',
-          model: 'User'
-        }})
-      .then(foundDrink => {    
-        console.log(foundDrink);  
-        res.render('drinks/details.hbs', {
-          cocktails: responseFromApi.data.drinks,
-          idDrink: drinkId,
-          foundDrink
-          //ingredients key (an array of k/v pairs)
-        });
-      })
-      .catch(err => console.log(`Err while getting a single post: ${err}`));
-  });
+      Drink.findOne({
+          drinkId
+        })
+        .populate('author comments')
+        .populate({
+          // we are populating author in the previously populated comments
+          path: 'comments',
+          populate: {
+            path: 'author',
+            model: 'User'
+          }
+        })
+        .then(foundDrink => {
+          console.log(foundDrink);
+          res.render('drinks/details.hbs', {
+            cocktails: responseFromApi.data.drinks,
+            idDrink: drinkId,
+            foundDrink
+            //ingredients key (an array of k/v pairs)
+          });
+        })
+        .catch(err => console.log(`Err while getting a single post: ${err}`));
+    });
 });
 
 // POST route - add a drink to user's Favorites list
 
-router.post('drinks/:drinkId/addFavorite', (req, res, next) => {
+router.post('/:drinkId/addFavorite', (req, res, next) => {
   const {
     drinkId
   } = req.params;
