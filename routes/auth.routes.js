@@ -150,9 +150,6 @@ router.post('/edit-profile', (req, res, next) => {
       })
   }
 
-
-  //IN PROGRESS - need to figure out how to implement hashing passwords on update - A. Garcia
-
   //if password was updated: 
   if (proposedPassword) {
     console.log(proposedPassword)
@@ -246,6 +243,7 @@ router.post('/logout', (req, res) => {
 
 router.get('/profile', routeGuard, (req, res) => {
   res.render('users/user-profile.hbs');
+  console.log(req.session.loggedInUser.favorites);
 });
 
 module.exports = router;
