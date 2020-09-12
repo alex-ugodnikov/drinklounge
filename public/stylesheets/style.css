@@ -327,9 +327,9 @@ input[type=text], .search-field {
   width: auto;
 }
 .cocktail-detail img {
-  border: 2px solid;
-  border-color: rgba(255, 255, 255, 0.1);
-  padding: 3px;
+    border: 2px solid;
+    border-color: rgba(255, 255, 255, 0.1);
+    padding: 3px;
 }
 
 #detail-layout {
@@ -409,4 +409,9 @@ input[type=text], .search-field {
 }
 #instructions-div h3 {
   margin-top: 2px;
+}
+
+#to-left img{
+ height: 45px;
+  
 }
