@@ -8,12 +8,16 @@ const Comment = require('../models/Comment.model');
 // require image uploader
 
 const fileUploader = require('../configs/cloudinary.config');
-const { response } = require('express');
+const {
+  response
+} = require('express');
 
 //require user model
 const User = require('../models/User.model');
 
+//////////////////////////
 /* GET all drinks page */
+//////////////////////////
 
 router.get('/alldrinks', (req, res, next) => {
   axios
@@ -32,11 +36,16 @@ router.get('/alldrinks', (req, res, next) => {
     });
 });
 
+/////////////////////////////
 /* GET search drinks page */
+/////////////////////////////
 
 router.get('/search', (req, res, next) => {
   // Pull variables from search query
-  const { letter, s } = req.query;
+  const {
+    letter,
+    s
+  } = req.query;
 
   // Checking if any search variables exist = run apropriate query
 
@@ -79,7 +88,9 @@ router.get('/search', (req, res, next) => {
   }
 });
 
+///////////////////////////////////////////////
 //GET route - show details for a Random Drink
+///////////////////////////////////////////////
 
 router.get('/random', (req, res, next) => {
   axios
@@ -88,8 +99,8 @@ router.get('/random', (req, res, next) => {
       const drinkId = responseFromApi.data.drinks[0].drinkid;
       //console.log(responseFromApi.data.drinks[0].idDrink);
       Drink.findOne({
-        drinkId
-      })
+          drinkId
+        })
         .populate('author comments')
         .populate({
           // we are populating author in the previously populated comments
@@ -113,7 +124,9 @@ router.get('/random', (req, res, next) => {
     .catch(err => console.log(`error getting drink details: ${err}`));
 });
 
+///////////////////////////////////////////////
 //GET route - show details for a single drink
+///////////////////////////////////////////////
 
 //pseudo code to manage array of ingredients with measurements for any drink:
 //iterate over every ingredient & measurement
@@ -125,25 +138,10 @@ router.get('/random', (req, res, next) => {
 router.get('/drinks/:id', (req, res, next) => {
   const drinkId = req.params.id;
 
-  // const ingredients = [responseFromApi.data.strIngredient1, responseFromApi.data.strMeasure1];
-  // const separator = '-';
   axios.get(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drinkId}`).then(responseFromApi => {
-    //console.log(responseFromApi.data.strIngredient1);
-    //pseudo code to manage array of ingredients with measurements for any drink:
-    // function combineIngredientsAndMeasures(object, keys, sep) {
-    //   return keys
-    //     .map(key => object[key])
-    //     .filter(v => v)
-    //     .join(sep);
-    // }
-    //iterate over every ingredient & measurement
-    //if ingredient has an associated measurement
-    //concatenate the strings ("tequila - 1.5")
-    //else push ingredient as is
-
     Drink.findOne({
-      drinkId
-    })
+        drinkId
+      })
       .populate('author comments')
       .populate({
         // we are populating author in the previously populated comments
@@ -155,26 +153,35 @@ router.get('/drinks/:id', (req, res, next) => {
       })
       .then(foundDrink => {
         console.log(foundDrink);
-        res.render('drinks/details.hbs', {
+        let data = {
           cocktails: responseFromApi.data.drinks,
           idDrink: drinkId,
           foundDrink
           //ingredients key (an array of k/v pairs)
-        });
+        }
+        //In Progress: Need to implement check to update Add to Favorites button to display Remove From Favorites if user already has drink in Favorites list - A. Garcia
+
+        //update isAddedToFavorites value to TRUE if user model already contains drinkId in Favorites.
+        data.isAddedToFavorites = req.session.loggedInUser.favorites.includes(data.drinkId);
+        res.render('drinks/details.hbs', data);
       })
-      .catch(err => console.log(`Err while getting a single post: ${err}`));
+      .catch(err => console.log(`Err while getting a drink's details: ${err}`));
   });
 });
 
+////////////////////////////////////////////////////
 // POST route - add a drink to user's Favorites list
+////////////////////////////////////////////////////
 
 router.post('/drinks/:drinkId/addFavorite', (req, res, next) => {
-  const { drinkId } = req.params;
+  const {
+    drinkId
+  } = req.params;
   User.findByIdAndUpdate(req.session.loggedInUser._id, {
-    $push: {
-      favorites: drinkId
-    }
-  })
+      $push: {
+        favorites: drinkId
+      }
+    })
     .then(newFavorite => {
       // User.save();
       console.log(`favorite added: ${newFavorite}`);
@@ -185,15 +192,19 @@ router.post('/drinks/:drinkId/addFavorite', (req, res, next) => {
     });
 });
 
+///////////////////////////////////////////////////////
 //POST route - remove a drink from user's Favorites list
+///////////////////////////////////////////////////////
 
 router.post('/drinks/:drinkId/removeFavorite', (req, res, next) => {
-  const { drinkId } = req.params;
+  const {
+    drinkId
+  } = req.params;
   User.findByIdAndUpdate(req.session.loggedInUser._id, {
-    $pull: {
-      favorites: drinkId
-    }
-  })
+      $pull: {
+        favorites: drinkId
+      }
+    })
     .then(removedFave => {
       // User.save();
       console.log(`favorite removed: ${removedFave}`);
@@ -204,7 +215,9 @@ router.post('/drinks/:drinkId/removeFavorite', (req, res, next) => {
     });
 });
 
+///////////////////////////////////////////////////////
 // GET route - show the details of a single post
+///////////////////////////////////////////////////////
 
 router.get('/posts/:postId', (req, res, next) => {
   Post.findById(req.params.postId)
