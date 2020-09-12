@@ -15,6 +15,9 @@ const apiUrl = require('../public/javascripts/script');
 const {
   restart
 } = require('nodemon');
+const {
+  default: Axios
+} = require('axios');
 
 ////////////////////////////////////////////////////////////////////////
 ///////////////////////////// SIGNUP //////////////////////////////////
@@ -241,9 +244,37 @@ router.post('/logout', (req, res) => {
   res.redirect('/');
 });
 
+// GET route - Access User Profile
+
 router.get('/profile', routeGuard, (req, res) => {
-  res.render('users/user-profile.hbs');
-  console.log(req.session.loggedInUser.favorites);
+  //check if user has any saved favorites and get the drink data from the API. 
+
+  //iterate through the favorites list array and push an axios call for the details of each drink into an empty array.
+  let axiosRequest = []
+  // console.log(req.session.loggedInUser)
+  req.session.loggedInUser.favorites.forEach((ele) => {
+    axiosRequest.push(Axios.get(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${ele}`));
+  });
+
+  //Then, use axios.all to complete all the axios calls in the helper array and user spread operator to return the responses into a new 'responses' array. 
+  Axios.all(axiosRequest).then(Axios.spread((...responses) => {
+    drinkData = []
+
+    //Last, iterate through the responses array created previously and push the data for each drink into a new 'drinkData' array. 
+    responses.forEach(oneDrink => {
+      drinkData.push(oneDrink.data.drinks[0])
+    })
+
+    //the page can now be rendered once with all the drink data returned in one array. 
+
+    res.render('users/user-profile.hbs', {
+      cocktails: drinkData
+    })
+    console.log(drinkData);
+  })).catch(err => {
+    console.log(`error getting user profile: ${err}`)
+  })
+  // }
 });
 
 module.exports = router;
