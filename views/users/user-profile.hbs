@@ -2,6 +2,14 @@
 <h2>Welcome, {{ user.username }}!</h2>
 <p>This is your profile page my friend! And your email is: {{ user.email }}</p>
 <button><a href='/edit-profile'>Edit Profile</a></button>
+
+{{#if user.favorites}}
+<h2>{{user.username}}'s Favorites</h2>
+<br />
+<p>{{user.favorites}}</p>
+{{else}}
+<h3>{{user.username}} does not have any favorites yet.</h3>
+{{/if}}
 {{else}}
 <p>Still no logged in user, sorry!</p>
 {{/if}}
