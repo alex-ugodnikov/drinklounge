@@ -4,7 +4,7 @@
     <h2>{{this.strDrink}}</h2> <span>
       {{!-- user prefaced with ../ to check a level above cocktails as user is not inside cocktails object --}}
       {{#if ../user}}
-      {{#unless isAddedToFavorites}}
+      {{#unless ../foundDrink.isAddedToFavorites}}
       <form action='{{idDrink}}/addFavorite' method="POST"><button id='fav-button' type='submit'>Add to
           Favorites</button>
     </span></form>
@@ -19,6 +19,7 @@
 
     <a href="/drinks/{{this.idDrink}}"><img src="{{this.strDrinkThumb}}" alt="" width="250"></a>
     <p>{{this.strDrink}} / {{ this.strAlcoholic }}</p>
+    {{!-- <p>{{../foundDrink.isAddedToFavorites}}</p> --}}
 
     <div id="instructions-div">
       <h3>Instructions</h3>
