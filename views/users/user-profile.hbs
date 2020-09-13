@@ -6,10 +6,15 @@
 {{#if user.favorites}}
 <h2>{{user.username}}'s Favorites</h2>
 <br />
-<p>{{user.favorites}}</p>
-{{else}}
-<h3>{{user.username}} does not have any favorites yet.</h3>
-{{/if}}
-{{else}}
-<p>Still no logged in user, sorry!</p>
-{{/if}}
+{{#each cocktails}}
+<div class="cocktail-detail">
+  <h2>{{this.strDrink}}</h2>
+  <a href="/drinks/{{this.idDrink}}"><img src="{{this.strDrinkThumb}}" alt="" width="250"></a>
+  <p>{{this.strDrink}} / {{ this.strAlcoholic }}</p>
+  {{/each}}
+  {{else}}
+  <h3>{{user.username}} does not have any favorites yet.</h3>
+  {{/if}}
+  {{else}}
+  <p>Still no logged in user, sorry!</p>
+  {{/if}}
