@@ -3,7 +3,7 @@ const router = express.Router();
 const axios = require('axios');
 
 const Drink = require('../models/Drink.model');
-const Comment = require('../models/Comment.model');
+const Post = require('../models/Post.model');
 
 // require image uploader
 
