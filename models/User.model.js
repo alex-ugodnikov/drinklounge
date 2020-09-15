@@ -28,6 +28,7 @@ const userSchema = new Schema({
     type: String,
     required: [true, 'Password is required.']
   },
+  //store array of drinkIds in favorites list
   favorites: [{
     type: String
   }]
