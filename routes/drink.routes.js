@@ -8,9 +8,7 @@ const Post = require('../models/Post.model');
 // require image uploader
 
 const fileUploader = require('../configs/cloudinary.config');
-const {
-  response
-} = require('express');
+const { response } = require('express');
 
 //require user model
 const User = require('../models/User.model');
@@ -42,10 +40,7 @@ router.get('/alldrinks', (req, res, next) => {
 
 router.get('/search', (req, res, next) => {
   // Pull variables from search query
-  const {
-    letter,
-    s
-  } = req.query;
+  const { letter, s } = req.query;
 
   // Checking if any search variables exist = run apropriate query
 
@@ -99,8 +94,8 @@ router.get('/random', (req, res, next) => {
       const drinkId = responseFromApi.data.drinks[0].drinkid;
       //console.log(responseFromApi.data.drinks[0].idDrink);
       Drink.findOne({
-          drinkId
-        })
+        drinkId
+      })
         .populate('author comments')
         .populate({
           // we are populating author in the previously populated comments
@@ -133,8 +128,8 @@ router.get('/drinks/:id', (req, res, next) => {
 
   axios.get(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drinkId}`).then(responseFromApi => {
     Drink.findOne({
-        drinkId
-      })
+      drinkId
+    })
       .populate('author comments')
       .populate({
         // we are populating author in the previously populated comments
@@ -150,28 +145,27 @@ router.get('/drinks/:id', (req, res, next) => {
 
         // Check if the Drink is already in our Db, if not, we need to create it
         if (foundDrink === null) {
-          console.log('No drink with this ID', drinkId)
+          console.log('No drink with this ID', drinkId);
           //Create a record of the drink with the id
           Drink.create({
-              drinkId
-            })
-            .then(newDrink => {
-              let data = {
-                cocktails: responseFromApi.data.drinks,
-                idDrink: drinkId,
-                newDrink
-              }
-              //update isAddedToFavorites value to TRUE if user model already contains drinkId in Favorites.
-              newDrink.isAddedToFavorites = req.session.loggedInUser.favorites.includes(data.idDrink);
-              res.render('drinks/details.hbs', data);
-              // console.log(newDrink.isAddedToFavorites);
-            })
+            drinkId
+          }).then(newDrink => {
+            let data = {
+              cocktails: responseFromApi.data.drinks,
+              idDrink: drinkId,
+              newDrink
+            };
+            //update isAddedToFavorites value to TRUE if user model already contains drinkId in Favorites.
+            newDrink.isAddedToFavorites = req.session.loggedInUser.favorites.includes(data.idDrink);
+            res.render('drinks/details.hbs', data);
+            // console.log(newDrink.isAddedToFavorites);
+          });
         } else {
           let data = {
             cocktails: responseFromApi.data.drinks,
             idDrink: drinkId,
             foundDrink
-          }
+          };
           //update isAddedToFavorites value to TRUE if user model already contains drinkId in Favorites.
           foundDrink.isAddedToFavorites = req.session.loggedInUser.favorites.includes(data.idDrink);
           res.render('drinks/details.hbs', data);
@@ -187,16 +181,13 @@ router.get('/drinks/:id', (req, res, next) => {
 ////////////////////////////////////////////////////
 
 router.post('/drinks/:drinkId/addFavorite', (req, res, next) => {
-  const {
-    drinkId
-  } = req.params;
+  const { drinkId } = req.params;
   User.findByIdAndUpdate(req.session.loggedInUser._id, {
-      $push: {
-        favorites: drinkId
-      }
-    })
+    $push: {
+      favorites: drinkId
+    }
+  })
     .then(newFavorite => {
-      // User.save();
       console.log(`favorite added: ${newFavorite}`);
       res.redirect('/');
     })
@@ -210,14 +201,12 @@ router.post('/drinks/:drinkId/addFavorite', (req, res, next) => {
 ///////////////////////////////////////////////////////
 
 router.post('/drinks/:drinkId/removeFavorite', (req, res, next) => {
-  const {
-    drinkId
-  } = req.params;
+  const { drinkId } = req.params;
   User.findByIdAndUpdate(req.session.loggedInUser._id, {
-      $pull: {
-        favorites: drinkId
-      }
-    })
+    $pull: {
+      favorites: drinkId
+    }
+  })
     .then(removedFave => {
       // User.save();
       console.log(`favorite removed: ${removedFave}`);
