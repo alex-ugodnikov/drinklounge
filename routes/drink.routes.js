@@ -128,13 +128,6 @@ router.get('/random', (req, res, next) => {
 //GET route - show details for a single drink
 ///////////////////////////////////////////////
 
-//pseudo code to manage array of ingredients with measurements for any drink:
-//iterate over every ingredient & measurement
-//if ingredient has an associated measurement
-//concatenate the strings ("tequila - 1.5")
-//else push ingredient as is
-//ingredients key (an array of k/v pairs)
-
 router.get('/drinks/:id', (req, res, next) => {
   const drinkId = req.params.id;
 
