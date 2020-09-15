@@ -1,8 +1,6 @@
 // routes/auth.routes.js
 
-const {
-  Router
-} = require('express');
+const { Router } = require('express');
 const router = new Router();
 const bcryptjs = require('bcryptjs');
 const mongoose = require('mongoose');
@@ -12,9 +10,7 @@ const saltRounds = 10;
 const User = require('../models/User.model');
 const routeGuard = require('../configs/route-guard.config');
 const apiUrl = require('../public/javascripts/script');
-const {
-  default: Axios
-} = require('axios');
+const { default: Axios } = require('axios');
 
 ////////////////////////////////////////////////////////////////////////
 ///////////////////////////// SIGNUP //////////////////////////////////
@@ -23,17 +19,12 @@ const {
 // .get() route ==> to display the signup form to users
 router.get('/signup', (req, res) => {
   res.render('auth/signup-form.hbs');
-  //test: 
   console.log(apiUrl);
 });
 
 // .post() route ==> to process form data
 router.post('/signup', (req, res, next) => {
-  const {
-    username,
-    email,
-    password
-  } = req.body;
+  const { username, email, password } = req.body;
 
   if (!username || !email || !password) {
     res.render('auth/signup-form.hbs', {
@@ -88,34 +79,34 @@ router.post('/signup', (req, res, next) => {
 ////////////////////////////////////////////////////////////////////////
 
 //.get() route ==> to display the update profile form
-router.get('/edit-profile', (req, res) => res.render('users/edit-profile.hbs'))
+router.get('/edit-profile', (req, res) => res.render('users/edit-profile.hbs'));
 
 //.post() profile route ==> to process updated profile data
 router.post('/edit-profile', (req, res, next) => {
-  const {
-    proposedUser,
-    proposedEmail,
-    proposedPassword
-  } = req.body;
+  const { proposedUser, proposedEmail, proposedPassword } = req.body;
 
   //check to make sure at least one field is filled out
   if (!proposedUser && !proposedEmail && !proposedPassword) {
     res.render('users/edit-profile.hbs', {
       errorMessage: 'Please update at least one field to save changes to your profile.'
-    })
+    });
   }
 
-  //if username was updated: 
+  //if username was updated:
   if (proposedUser) {
-    console.log(proposedUser)
-    User.findByIdAndUpdate(req.session.loggedInUser._id, {
+    console.log(proposedUser);
+    User.findByIdAndUpdate(
+      req.session.loggedInUser._id,
+      {
         username: proposedUser
-      }, {
+      },
+      {
         new: true
-      })
+      }
+    )
       .then(updatedUser => {
-        console.log(`username updated: ${updatedUser}`)
-        res.redirect('/profile')
+        console.log(`username updated: ${updatedUser}`);
+        res.redirect('/profile');
       })
       .catch(err => {
         //check that username is unique:
@@ -123,22 +114,25 @@ router.post('/edit-profile', (req, res, next) => {
           res.status(500).render('users/edit-profile.hbs', {
             errorMessage: 'Username and email need to be unique. Either username or email is already used.'
           });
-        } else console.log(`error updating username: ${err}`)
-      })
+        } else console.log(`error updating username: ${err}`);
+      });
   }
 
   //if email was updated:
   if (proposedEmail) {
-    console.log(proposedEmail)
-    User.findByIdAndUpdate(req.session.loggedInUser._id, {
+    console.log(proposedEmail);
+    User.findByIdAndUpdate(
+      req.session.loggedInUser._id,
+      {
         email: proposedEmail
-      }, {
+      },
+      {
         new: true
-      })
+      }
+    )
       .then(updatedEmail => {
-        console.log(`user email updated: ${updatedEmail}`)
-        res.redirect('/profile')
-
+        console.log(`user email updated: ${updatedEmail}`);
+        res.redirect('/profile');
       })
       .catch(err => {
         //check that email is unique:
@@ -146,13 +140,13 @@ router.post('/edit-profile', (req, res, next) => {
           res.status(500).render('users/edit-profile.hbs', {
             errorMessage: 'Username and email need to be unique. Either username or email is already used.'
           });
-        } else console.log(`error updating email: ${err}`)
-      })
+        } else console.log(`error updating email: ${err}`);
+      });
   }
 
-  //if password was updated: 
+  //if password was updated:
   if (proposedPassword) {
-    console.log(proposedPassword)
+    console.log(proposedPassword);
     // make sure passwords are strong:
     if (!regex.test(proposedPassword)) {
       res.status(500).render('users/edit-profile.hbs', {
@@ -166,14 +160,18 @@ router.post('/edit-profile', (req, res, next) => {
       .then(salt => bcryptjs.hash(proposedPassword, salt))
       //update the user with the new password
       .then(hashedPassword => {
-        User.findByIdAndUpdate(req.session.loggedInUser._id, {
-          password: hashedPassword
-        }, {
-          new: true
-        })
+        User.findByIdAndUpdate(
+          req.session.loggedInUser._id,
+          {
+            password: hashedPassword
+          },
+          {
+            new: true
+          }
+        );
       })
       .then(updatedUser => {
-        console.log('user password has been updated.')
+        console.log('user password has been updated.');
         res.redirect('/profile');
       })
       .catch(error => {
@@ -188,7 +186,6 @@ router.post('/edit-profile', (req, res, next) => {
   }
 });
 
-
 ////////////////////////////////////////////////////////////////////////
 ///////////////////////////// LOGIN ////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
@@ -198,10 +195,7 @@ router.get('/login', (req, res) => res.render('auth/login-form.hbs'));
 
 // .post() login route ==> to process form data
 router.post('/login', (req, res, next) => {
-  const {
-    email,
-    password
-  } = req.body;
+  const { email, password } = req.body;
 
   if (email === '' || password === '') {
     res.render('auth/login-form.hbs', {
@@ -211,8 +205,8 @@ router.post('/login', (req, res, next) => {
   }
 
   User.findOne({
-      email
-    })
+    email
+  })
     .then(user => {
       if (!user) {
         res.render('auth/login-form.hbs', {
@@ -244,33 +238,37 @@ router.post('/logout', (req, res) => {
 // GET route - Access User Profile
 
 router.get('/profile', routeGuard, (req, res) => {
-  //check if user has any saved favorites and get the drink data from the API. 
+  //check if user has any saved favorites and get the drink data from the API.
 
   //iterate through the favorites list array and push an axios call for the details of each drink into an empty array.
-  let axiosRequest = []
+  let axiosRequest = [];
   // console.log(req.session.loggedInUser)
-  req.session.loggedInUser.favorites.forEach((ele) => {
+  req.session.loggedInUser.favorites.forEach(ele => {
     axiosRequest.push(Axios.get(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${ele}`));
   });
 
-  //Then, use axios.all to complete all the axios calls in the helper array and user spread operator to return the responses into a new 'responses' array. 
-  Axios.all(axiosRequest).then(Axios.spread((...responses) => {
-    drinkData = []
+  //Then, use axios.all to complete all the axios calls in the helper array and user spread operator to return the responses into a new 'responses' array.
+  Axios.all(axiosRequest)
+    .then(
+      Axios.spread((...responses) => {
+        drinkData = [];
 
-    //Last, iterate through the responses array created previously and push the data for each drink into a new 'drinkData' array. 
-    responses.forEach(oneDrink => {
-      drinkData.push(oneDrink.data.drinks[0])
-    })
+        //Last, iterate through the responses array created previously and push the data for each drink into a new 'drinkData' array.
+        responses.forEach(oneDrink => {
+          drinkData.push(oneDrink.data.drinks[0]);
+        });
 
-    //the page can now be rendered once with all the drink data returned in one array. 
+        //the page can now be rendered once with all the drink data returned in one array.
 
-    res.render('users/user-profile.hbs', {
-      cocktails: drinkData
-    })
-    console.log(drinkData);
-  })).catch(err => {
-    console.log(`error getting user profile: ${err}`)
-  })
+        res.render('users/user-profile.hbs', {
+          cocktails: drinkData
+        });
+        console.log(drinkData);
+      })
+    )
+    .catch(err => {
+      console.log(`error getting user profile: ${err}`);
+    });
   // }
 });
 
