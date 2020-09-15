@@ -13,9 +13,6 @@ const User = require('../models/User.model');
 const routeGuard = require('../configs/route-guard.config');
 const apiUrl = require('../public/javascripts/script');
 const {
-  restart
-} = require('nodemon');
-const {
   default: Axios
 } = require('axios');
 
