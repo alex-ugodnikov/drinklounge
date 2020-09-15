@@ -80,10 +80,16 @@
 {{#if cocktails}}
   <div id = "all-cocktails">
     {{#each cocktails}}
+
       <div class="single-cocktail">
         <a href="/drinks/{{this.idDrink}}"><img src="{{this.strDrinkThumb}}" alt="" width="150"></a>
         <p class="drink-info">{{this.strDrink}} / {{ this.strAlcoholic }}</p>
-        <p><button class="details-button"><a href="/drinks/{{this.idDrink}}"> Show details </a></button></p>
+
+<div class="nav-button button-e" id="">
+    <div id="circle"></div>
+    <a href="/drinks/{{this.idDrink}}"> Show details </a>
+    </div>
+        
       </div>
     {{/each}}
   </div>
