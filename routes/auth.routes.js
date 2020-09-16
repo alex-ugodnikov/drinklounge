@@ -255,7 +255,7 @@ router.get('/profile', routeGuard, (req, res) => {
 
   //Then, use axios.all to complete all the axios calls in the helper array and user spread operator to return the responses into a new 'responses' array. 
   Axios.all(axiosRequest).then(Axios.spread((...responses) => {
-    drinkData = []
+    let  drinkData = []
 
     //Last, iterate through the responses array created previously and push the data for each drink into a new 'drinkData' array. 
     responses.forEach(oneDrink => {
