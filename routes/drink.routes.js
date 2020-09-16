@@ -161,8 +161,9 @@ router.get('/drinks/:id', (req, res, next) => {
               newDrink
             };
             //update isAddedToFavorites value to TRUE if user model already contains drinkId in Favorites.
-            newDrink.isAddedToFavorites = req.session.loggedInUser.favorites.includes(data.idDrink);
-            res.render('drinks/details.hbs', data);
+            if (req.session.loggedInUser) {
+              newDrink.isAddedToFavorites = req.session.loggedInUser.favorites.includes(data.idDrink);
+            } else res.render('drinks/details.hbs', data);
             // console.log(newDrink.isAddedToFavorites);
           });
         } else {
@@ -172,8 +173,9 @@ router.get('/drinks/:id', (req, res, next) => {
             foundDrink
           };
           //update isAddedToFavorites value to TRUE if user model already contains drinkId in Favorites.
-          foundDrink.isAddedToFavorites = req.session.loggedInUser.favorites.includes(data.idDrink);
-          res.render('drinks/details.hbs', data);
+          if (req.session.loggedInUser) {
+            foundDrink.isAddedToFavorites = req.session.loggedInUser.favorites.includes(data.idDrink);
+          } else res.render('drinks/details.hbs', data);
           // console.log(foundDrink.isAddedToFavorites);
         }
       })
