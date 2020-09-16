@@ -3,7 +3,7 @@ const path = require('path');
 const express = require('express');
 const createError = require('http-errors');
 const logger = require('morgan');
-const favicon = require('serve-favicon'); 
+const favicon = require('serve-favicon');
 
 const cookieParser = require('cookie-parser');
 const hbs = require('hbs');
@@ -33,13 +33,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({
+  extended: true
+}));
 app.use(cookieParser());
 
 app.use(bindUserToViewLocals);
 
 const app_name = require('./package.json').name;
-const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.')[0]}`);
 
 // Routes middleware
 app.use('/', indexRouter);

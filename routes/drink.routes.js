@@ -128,13 +128,6 @@ router.get('/random', (req, res, next) => {
 //GET route - show details for a single drink
 ///////////////////////////////////////////////
 
-//pseudo code to manage array of ingredients with measurements for any drink:
-//iterate over every ingredient & measurement
-//if ingredient has an associated measurement
-//concatenate the strings ("tequila - 1.5")
-//else push ingredient as is
-//ingredients key (an array of k/v pairs)
-
 router.get('/drinks/:id', (req, res, next) => {
   const drinkId = req.params.id;
 
@@ -157,31 +150,32 @@ router.get('/drinks/:id', (req, res, next) => {
 
         // Check if the Drink is already in our Db, if not, we need to create it
         if (foundDrink === null) {
-          console.log('No drink with this ID', drinkId)
+          console.log('No drink with this ID', drinkId);
           //Create a record of the drink with the id
           Drink.create({
-              drinkId
-            })
-            .then(newDrink => {
-              let data = {
-                cocktails: responseFromApi.data.drinks,
-                idDrink: drinkId,
-                newDrink
-              }
-              //update isAddedToFavorites value to TRUE if user model already contains drinkId in Favorites.
+            drinkId
+          }).then(newDrink => {
+            let data = {
+              cocktails: responseFromApi.data.drinks,
+              idDrink: drinkId,
+              newDrink
+            };
+            //update isAddedToFavorites value to TRUE if user model already contains drinkId in Favorites.
+            if (req.session.loggedInUser) {
               newDrink.isAddedToFavorites = req.session.loggedInUser.favorites.includes(data.idDrink);
-              res.render('drinks/details.hbs', data);
-              // console.log(newDrink.isAddedToFavorites);
-            })
+            } else res.render('drinks/details.hbs', data);
+            // console.log(newDrink.isAddedToFavorites);
+          });
         } else {
           let data = {
             cocktails: responseFromApi.data.drinks,
             idDrink: drinkId,
             foundDrink
-          }
+          };
           //update isAddedToFavorites value to TRUE if user model already contains drinkId in Favorites.
-          foundDrink.isAddedToFavorites = req.session.loggedInUser.favorites.includes(data.idDrink);
-          res.render('drinks/details.hbs', data);
+          if (req.session.loggedInUser) {
+            foundDrink.isAddedToFavorites = req.session.loggedInUser.favorites.includes(data.idDrink);
+          } else res.render('drinks/details.hbs', data);
           // console.log(foundDrink.isAddedToFavorites);
         }
       })
@@ -203,7 +197,6 @@ router.post('/drinks/:drinkId/addFavorite', (req, res, next) => {
       }
     })
     .then(newFavorite => {
-      // User.save();
       console.log(`favorite added: ${newFavorite}`);
       res.redirect('/');
     })
