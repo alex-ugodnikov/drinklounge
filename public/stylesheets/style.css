@@ -115,9 +115,9 @@ ul li {
 #land-content{
   display: flex;
   flex-direction: column;
-  height: 50vw;
   justify-content: center;
   align-items: center;
+  height: 50vw;
 }
 
 #land-btn{
@@ -482,4 +482,13 @@ input[type=text], .search-field {
 
 #edit-profile-button:hover {
   color: #2D3142;
+}
+
+#carouselExampleIndicators {
+  width: 85vw;
+  height: 45vw;
+}
+
+.carousel-inner img {
+  height: 45vw;
 }
