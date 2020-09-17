@@ -5,8 +5,15 @@
       {{!-- user prefaced with ../ to check a level above cocktails as user is not inside cocktails object --}}
       {{#if ../user}}
       {{#unless ../foundDrink.isAddedToFavorites}}
-      <form action='{{idDrink}}/addFavorite' method="POST"><button id='fav-button' type='submit'>Add to
+
+      <form action='{{idDrink}}/addFavorite' method="POST">
+            
+        <div class="nav-button button-e" id="fav-button-div">
+        <div id="circle"></div>      
+      <button id='fav-button' type='submit'>Add to
           Favorites</button>
+        </div>
+
     </span></form>
     {{else}}
     <form action='{{idDrink}}/removeFavorite' method="POST"><button id='fav-button' type='submit'>Remove from
