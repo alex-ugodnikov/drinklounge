@@ -206,7 +206,7 @@ router.post('/drinks/:drinkId/addFavorite', (req, res, next) => {
     .then(newFavorite => {
       req.session.loggedInUser = newFavorite;
       console.log(`favorite added: ${newFavorite}`);
-      res.redirect(`/drinks/:${drinkId}`);
+      res.redirect(`/drinks/${drinkId}`);
     })
     .catch(err => {
       console.log(`error adding favorite: ${err}`);
@@ -231,7 +231,7 @@ router.post('/drinks/:drinkId/removeFavorite', (req, res, next) => {
     .then(removedFave => {
       req.session.loggedInUser = newFavorite;
       console.log(`favorite removed: ${removedFave}`);
-      res.redirect(`/drinks/:${drinkId}`);
+      res.redirect(`/drinks/${drinkId}`);
     })
     .catch(err => {
       console.log(`error removing favorite: ${err}`);
