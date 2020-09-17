@@ -14,6 +14,9 @@ const {
 
 //require user model
 const User = require('../models/User.model');
+const {
+  TooManyRequests
+} = require('http-errors');
 
 //////////////////////////
 /* GET all drinks page */
@@ -197,10 +200,13 @@ router.post('/drinks/:drinkId/addFavorite', (req, res, next) => {
       $push: {
         favorites: drinkId
       }
+    }, {
+      new: true
     })
     .then(newFavorite => {
+      req.session.loggedInUser = newFavorite;
       console.log(`favorite added: ${newFavorite}`);
-      res.redirect('/');
+      res.redirect(`/drinks/${drinkId}`);
     })
     .catch(err => {
       console.log(`error adding favorite: ${err}`);
@@ -219,11 +225,13 @@ router.post('/drinks/:drinkId/removeFavorite', (req, res, next) => {
       $pull: {
         favorites: drinkId
       }
+    }, {
+      new: true
     })
     .then(removedFave => {
-      // User.save();
+      req.session.loggedInUser = removedFave;
       console.log(`favorite removed: ${removedFave}`);
-      res.redirect('/');
+      res.redirect(`/drinks/${drinkId}`);
     })
     .catch(err => {
       console.log(`error removing favorite: ${err}`);
