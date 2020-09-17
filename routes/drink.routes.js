@@ -225,9 +225,11 @@ router.post('/drinks/:drinkId/removeFavorite', (req, res, next) => {
       $pull: {
         favorites: drinkId
       }
+    }, {
+      new: true
     })
     .then(removedFave => {
-
+      req.session.loggedInUser = newFavorite;
       console.log(`favorite removed: ${removedFave}`);
       res.redirect('/');
     })
