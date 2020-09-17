@@ -229,7 +229,7 @@ router.post('/drinks/:drinkId/removeFavorite', (req, res, next) => {
       new: true
     })
     .then(removedFave => {
-      req.session.loggedInUser = newFavorite;
+      req.session.loggedInUser = removedFave;
       console.log(`favorite removed: ${removedFave}`);
       res.redirect(`/drinks/${drinkId}`);
     })
