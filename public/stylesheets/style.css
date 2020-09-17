@@ -337,11 +337,16 @@ input[type=text], .search-field {
   font-size: 1.5em;
   padding-bottom: 1em;
   width: auto;
+  margin: auto 20px;
 }
 .cocktail-detail img {
     border: 2px solid;
     border-color: rgba(255, 255, 255, 0.1);
     padding: 3px;
+}
+
+.cocktail-detail h2 {
+  font-size: 1.4em;
 }
 
 #detail-layout {
@@ -491,4 +496,10 @@ input[type=text], .search-field {
 
 .carousel-inner img {
   height: 45vw;
+}
+
+#favorites-list {
+  display: flex;
+  justify-content: space-between;
+
 }
