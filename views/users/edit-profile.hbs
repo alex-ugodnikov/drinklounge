@@ -1,4 +1,4 @@
-<div id="form">
+<div id="edit-form">
   <h2>Edit Profile</h2>
   <form action="/edit-profile" method="POST">
     <label>Username
@@ -6,15 +6,17 @@
     </label>
 
     <label>Email
-      <input type="email" name="proposedEmail" placeholder="{{user.email}}" />
+      <input class="edit-profile-input" type="email" name="proposedEmail" placeholder="{{user.email}}" />
     </label>
 
     <label>Password
-      <input type="password" name="proposedPassword" placeholder="********" />
+      <input class="edit-profile-input" type="password" name="proposedPassword" placeholder="********" />
     </label>
 
-    <button type="submit">Save Changes</button>
-
+    <div class="nav-button button-e" id="land-btn">
+    <div id="circle"></div>
+      <button id="signup-form-button" type="submit">Save Changes</button>
+    </div>
     {{#if errorMessage}}
     <p class="error">{{errorMessage}}</p>
     {{/if}}

@@ -503,3 +503,18 @@ input[type=text], .search-field {
   justify-content: space-between;
 
 }
+
+input[type=text], .edit-profile-input {
+  width: 700px;
+  text-align: center;
+  border: none;
+  color: #FFFFFF;
+  border-bottom: 1px solid white;
+  background-color: rgba(255, 255, 255, 0.1);
+  font-size: 18px;
+}
+
+#edit-form{
+  text-align: center;
+  color: white;
+}
