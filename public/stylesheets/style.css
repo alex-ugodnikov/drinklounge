@@ -308,7 +308,7 @@ input[type='text'],
   height: 100%;
   font-weight: 300;
   font-size: 1.6em;
-  align-content: center;
+  text-align: center;
 }
 
 #login-form-button:hover {
