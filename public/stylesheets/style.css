@@ -93,6 +93,7 @@ ul li {
 #form h2 {
   display: flex;
   justify-content: center;
+  color: white;
 }
 
 #land-head {
