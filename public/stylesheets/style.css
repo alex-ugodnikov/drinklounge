@@ -1,7 +1,7 @@
 body {
   padding: 50px;
   font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif;
-  background: linear-gradient(#072c41,#000000) fixed;
+  background: linear-gradient(#072c41, #000000) fixed;
 }
 
 a {
@@ -42,7 +42,6 @@ form input {
   width: 100%; 
 }
   */
- 
 
 form button:hover {
   background: #fff;
@@ -68,7 +67,6 @@ ul {
 ul li {
   line-height: 20px;
 }
-
 
 #logout-form {
   margin: 0;
@@ -97,12 +95,12 @@ ul li {
   justify-content: center;
 }
 
-#land-head{
+#land-head {
   text-align: center;
   border-top: 1px solid black;
 }
 
-#land-div{
+#land-div {
   text-align: center;
   justify-content: center;
   font-size: 1.2em;
@@ -112,7 +110,7 @@ ul li {
   justify-content: space-evenly;
 }
 
-#land-content{
+#land-content {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -120,7 +118,7 @@ ul li {
   height: 50vw;
 }
 
-#land-btn{
+#land-btn {
   width: 350px;
 }
 
@@ -128,33 +126,32 @@ ul li {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-
 }
 
 #all-cocktails .single-cocktail {
-  flex-direction: row;  
+  flex-direction: row;
   width: 200px;
   text-align: center;
   border: 1px solid rgba(255, 255, 255, 0.1);
   margin: 20px 40px;
 }
 
-#background{
+#background {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
-.drink-info{
+.drink-info {
   font-size: large;
   color: white;
   margin: 0;
 }
 
-#all-head{
+#all-head {
   text-align: center;
   color: white;
 }
 
-.single-cocktail a{
+.single-cocktail a {
   font-size: large;
   color: #fff;
 }
@@ -166,34 +163,34 @@ ul li {
 
 .browse-cocktails a {
   padding: 8px 5px;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
-input[type=text], .search-field {
+input[type='text'],
+.search-field {
   width: 700px;
   text-align: center;
   border: none;
-  color: #FFFFFF;
+  color: #ffffff;
   border-bottom: 1px solid white;
   background-color: rgba(255, 255, 255, 0.1);
   font-size: 18px;
 }
 
-#navbar{
+#navbar {
   display: flex;
   justify-content: space-between;
   height: 45px;
   background-color: rgba(255, 255, 255, 0.1);
 }
 
-
-#to-center{
+#to-center {
   margin: 0;
   color: white;
   font-size: 1.2em;
 }
 
-#to-right{
+#to-right {
   font-size: 1.2em;
 }
 
@@ -216,12 +213,12 @@ input[type=text], .search-field {
   display: inline-flex;
   height: 30px;
   width: 150px;
-  border: 2px solid #BFC0C0;
+  border: 2px solid #bfc0c0;
   margin: 5px 5px;
-  color: #BFC0C0;
+  color: #bfc0c0;
   text-transform: uppercase;
   text-decoration: none;
-  font-size: .8em;
+  font-size: 0.8em;
   letter-spacing: 1px;
   align-items: center;
   justify-content: center;
@@ -237,7 +234,7 @@ input[type=text], .search-field {
 
 .button-e a {
   position: relative;
-  transition: all .45s ease-Out;
+  transition: all 0.45s ease-Out;
   font-size: 1.2em;
   width: 100%;
   height: 100%;
@@ -251,9 +248,9 @@ input[type=text], .search-field {
   opacity: 0;
   line-height: 40px;
   border-radius: 50%;
-  background: #BFC0C0;
+  background: #bfc0c0;
   position: absolute;
-  transition: all .5s ease-Out;
+  transition: all 0.5s ease-Out;
   top: 20px;
   left: 70px;
 }
@@ -267,17 +264,17 @@ input[type=text], .search-field {
 }
 
 .button-e:hover a {
-  color: #2D3142;
+  color: #2d3142;
   text-decoration: none;
 }
 
 #search-button {
-    all: unset;
-    z-index: 1;
-    font-size: 1.5em;
-    width: 100%;
-    font-weight: 300;
-    font-size: 1.6em;
+  all: unset;
+  z-index: 1;
+  font-size: 1.5em;
+  width: 100%;
+  font-weight: 300;
+  font-size: 1.6em;
 }
 
 #search-button:hover {
@@ -300,10 +297,10 @@ input[type=text], .search-field {
 }
 
 #logout-button:hover {
-  color: #2D3142;
+  color: #2d3142;
 }
 
-#login-form-button{
+#login-form-button {
   all: unset;
   z-index: 1;
   width: 100%;
@@ -314,10 +311,10 @@ input[type=text], .search-field {
 }
 
 #login-form-button:hover {
-  color: #2D3142;
+  color: #2d3142;
 }
 
-#signup-form-button{
+#signup-form-button {
   all: unset;
   z-index: 1;
   font-size: 1.2em;
@@ -328,7 +325,7 @@ input[type=text], .search-field {
 }
 
 #signup-form-button:hover {
-  color: #2D3142;
+  color: #2d3142;
 }
 
 .cocktail-detail {
@@ -340,9 +337,9 @@ input[type=text], .search-field {
   margin: auto 20px;
 }
 .cocktail-detail img {
-    border: 2px solid;
-    border-color: rgba(255, 255, 255, 0.1);
-    padding: 3px;
+  border: 2px solid;
+  border-color: rgba(255, 255, 255, 0.1);
+  padding: 3px;
 }
 
 .cocktail-detail h2 {
@@ -362,11 +359,11 @@ input[type=text], .search-field {
 }
 
 .cocktail-detail p {
- margin-bottom: 3px;
- margin-top: 0%;
+  margin-bottom: 3px;
+  margin-top: 0%;
 }
 
-#comments-div{
+#comments-div {
   color: white;
   font-size: 1.2em;
   border: 1px solid;
@@ -374,7 +371,7 @@ input[type=text], .search-field {
   padding: 5px;
 }
 
-#comments-div h2{
+#comments-div h2 {
   margin-top: 0%;
 }
 
@@ -413,27 +410,25 @@ input[type=text], .search-field {
 }
 
 #add-comment-btn:hover {
-  color: #2D3142;
+  color: #2d3142;
 }
 
-#instructions-div{
+#instructions-div {
   border: 1px solid;
   border-color: rgba(255, 255, 255, 0.1);
   padding: 10px;
   padding-top: 1px;
   margin-top: 15px;
-
 }
 #instructions-div h3 {
   margin-top: 2px;
 }
 
-#to-left img{
- height: 45px;
-  
+#to-left img {
+  height: 45px;
 }
 
-#fav-button{
+#fav-button {
   all: unset;
   z-index: 1;
   font-size: 1.2em;
@@ -443,20 +438,20 @@ input[type=text], .search-field {
 }
 
 #fav-button:hover {
-  color: #2D3142;
+  color: #2d3142;
 }
 
-#fav-button-div{
+#fav-button-div {
   width: 250px;
 }
 
-.search-input{
+.search-input {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-#details-button{
+#details-button {
   all: unset;
   z-index: 1;
   font-size: 1.2em;
@@ -465,17 +460,17 @@ input[type=text], .search-field {
   font-weight: 300;
 }
 #details-button:hover {
-  color: #2D3142;
+  color: #2d3142;
 }
 
-#profile{
+#profile {
   display: flex;
   flex-direction: column;
   align-items: center;
   color: #fff;
 }
 
-#edit-profile-button{
+#edit-profile-button {
   all: unset;
   z-index: 1;
   font-size: 1.2em;
@@ -486,7 +481,7 @@ input[type=text], .search-field {
 }
 
 #edit-profile-button:hover {
-  color: #2D3142;
+  color: #2d3142;
 }
 
 #carouselExampleIndicators {
@@ -501,20 +496,21 @@ input[type=text], .search-field {
 #favorites-list {
   display: flex;
   justify-content: space-between;
-
+  flex-wrap: wrap;
 }
 
-input[type=text], .edit-profile-input {
+input[type='text'],
+.edit-profile-input {
   width: 700px;
   text-align: center;
   border: none;
-  color: #FFFFFF;
+  color: #ffffff;
   border-bottom: 1px solid white;
   background-color: rgba(255, 255, 255, 0.1);
   font-size: 18px;
 }
 
-#edit-form{
+#edit-form {
   text-align: center;
   color: white;
 }
