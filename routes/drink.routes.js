@@ -99,7 +99,7 @@ router.get('/random', (req, res, next) => {
   axios
     .get(`https://www.thecocktaildb.com/api/json/v1/1/random.php`)
     .then(responseFromApi => {
-      const drinkId = responseFromApi.data.drinks[0].idDrink;
+      const drinkId = responseFromApi.data.drinks[0].drinkid;
       //console.log(responseFromApi.data.drinks[0].idDrink);
       Drink.findOne({
           drinkId
@@ -115,44 +115,13 @@ router.get('/random', (req, res, next) => {
         })
         .then(foundDrink => {
 
-          if (foundDrink === null) {
-            console.log('No drink with this ID', drinkId);
-            //Create a record of the drink with the id
-            Drink.create({
-              drinkId
-            }).then(newDrink => {
-              let data = {
-                cocktails: responseFromApi.data.drinks,
-                idDrink: drinkId,
-                newDrink
-              };
-              //update isAddedToFavorites value to TRUE if user model already contains drinkId in Favorites.
-              if (req.session.loggedInUser) {
-                newDrink.isAddedToFavorites = req.session.loggedInUser.favorites.includes(data.idDrink);
-              }
-              res.render('drinks/details.hbs', data);
-              // console.log(newDrink.isAddedToFavorites);
-            });
-          } else {
-            let data = {
-              cocktails: responseFromApi.data.drinks,
-              idDrink: drinkId,
-              foundDrink
-            };
-            //update isAddedToFavorites value to TRUE if user model already contains drinkId in Favorites.
-            if (req.session.loggedInUser) {
-              foundDrink.isAddedToFavorites = req.session.loggedInUser.favorites.includes(data.idDrink);
-            }
-            res.render('drinks/details.hbs', data);
-            // console.log(foundDrink.isAddedToFavorites);
-          }
-          // console.log(foundDrink);
-          // res.render('drinks/details.hbs', {
-          //   cocktails: responseFromApi.data.drinks,
-          //   idDrink: drinkId,
-          //   foundDrink
-          //   //ingredients key (an array of k/v pairs)
-          // });
+          console.log(foundDrink);
+          res.render('drinks/details.hbs', {
+            cocktails: responseFromApi.data.drinks,
+            idDrink: drinkId,
+            foundDrink
+            //ingredients key (an array of k/v pairs)
+          });
         })
         .catch(err => console.log(`Err while getting a single post: ${err}`));
     })
