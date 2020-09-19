@@ -1,4 +1,5 @@
-<div id="form">
+<div id="background-form">
+
   <h2>Signup</h2>
   <form action="/signup" method="POST">
     <label>Username
@@ -6,7 +7,7 @@
     </label>
 
     <label>Email
-      <input type="email" name="email" placeholder="hello@ironhack.com" />
+      <input id="email-input" type="email" name="email" placeholder="hello@ironhack.com" />
     </label>
 
     <label>Password
@@ -22,4 +23,5 @@
       <p class="error">{{errorMessage}}</p>
     {{/if}}
   </form>
+
 </div>
