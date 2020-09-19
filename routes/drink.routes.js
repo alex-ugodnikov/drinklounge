@@ -99,7 +99,7 @@ router.get('/random', (req, res, next) => {
   axios
     .get(`https://www.thecocktaildb.com/api/json/v1/1/random.php`)
     .then(responseFromApi => {
-      const drinkId = responseFromApi.data.drinks[0].drinkid;
+      const drinkId = responseFromApi.data.drinks[0].idDrink;
       //console.log(responseFromApi.data.drinks[0].idDrink);
       Drink.findOne({
           drinkId
