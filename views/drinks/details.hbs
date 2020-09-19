@@ -16,8 +16,12 @@
 
     </span></form>
     {{else}}
-    <form action='{{idDrink}}/removeFavorite' method="POST"><button id='fav-button' type='submit'>Remove from
-        Favorites</button>
+    <form action='{{idDrink}}/removeFavorite' method="POST">
+        <div class="nav-button button-e" id="fav-button-div">
+        <div id="circle"></div> 
+    <button id='remove-fav-button' type='submit'>Remove from Favorites</button>
+        </div>
+
       </span></form>
     {{/unless}}
     {{else}}

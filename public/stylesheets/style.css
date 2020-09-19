@@ -11,7 +11,7 @@ a {
 }
 
 form label {
-  color: #666;
+  color: white;
   display: inline-block;
   margin-bottom: 10px;
   text-align: center;
@@ -19,12 +19,14 @@ form label {
 }
 
 form input {
-  box-sizing: border-box;
-  font-size: 14px;
-  outline: 0;
-  padding: 4px;
-  width: 50%;
-  margin-bottom: 20px;
+  width: 700px;
+  text-align: center;
+  border: none;
+  color: #FFFFFF;
+  border-bottom: 1px solid white;
+  background-color: rgba(255, 255, 255, 0.1);
+  font-size: 18px;
+  
 }
 
 /* form button {
@@ -518,3 +520,34 @@ input[type=text], .edit-profile-input {
   text-align: center;
   color: white;
 }
+
+#background-form{
+  text-align: center;
+  color: #fff;
+
+}
+
+#email-input{
+  margin-left: 1.7em;
+}
+
+#login-form{
+  text-align: center;
+  color: white;
+}
+.search-field{
+  margin-bottom: 1em;
+}
+
+#remove-fav-button{
+  all: unset;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  font-weight: 300;
+}
+
+#remove-fav-button:hover{
+  color: #2D3142;
+}
+
