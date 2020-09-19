@@ -539,4 +539,15 @@ input[type=text], .edit-profile-input {
   margin-bottom: 1em;
 }
 
+#remove-fav-button{
+  all: unset;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  font-weight: 300;
+}
+
+#remove-fav-button:hover{
+  color: #2D3142;
+}
 
